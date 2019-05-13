@@ -115,35 +115,6 @@
                 <!-- /.dropdown-menu -->
               </li>
               <!-- /.nav-item -->
-              <!-- .nav-item -->
-              <!--<li class="nav-item dropdown header-nav-dropdown has-notified">-->
-              <li class="nav-item dropdown header-nav-dropdown">
-                <a class="nav-link" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <span class="fa fa-dollar-sign"></span>
-                </a>
-                <div class="dropdown-arrow"></div>
-                <!-- .dropdown-menu -->
-                <div class="dropdown-menu dropdown-menu-rich dropdown-menu-right">
-                  <!-- .dropdown-sheets -->
-                  <div class="dropdown-sheets">
-                    <!-- .dropdown-sheet-item -->
-                    <div class="dropdown-sheet-item" ng-repeat="coin in global_coins">
-                      <a ui-sref="wallets.wallet({wallet:coin.internal_name})" class="tile-wrapper">
-                        <figure class="user-avatar user-avatar-sm">
-                          <img src="{{coin.logo_url}}" alt="User Avatar">
-                        </figure>
-                        <span class="tile-peek">
-                          {{coin.name}}
-                        </span>
-                      </a>
-                    </div>
-                    <!-- /.dropdown-sheet-item -->
-                  </div>
-                  <!-- .dropdown-sheets -->
-                </div>
-                <!-- .dropdown-menu -->
-              </li>
-              <!-- /.nav-item -->
             </ul>
             <!-- /.nav -->
             <!-- .btn-account -->
@@ -265,16 +236,6 @@
                 <a ui-sref="billing" class="menu-link">
                   <span class="menu-icon fas fa-wallet"></span>
                   <span class="menu-text">Billing</span>
-                </a>
-                <!-- /child menu -->
-              </li>
-              <!-- /.menu-item -->
-              <!-- .menu-item -->
-              <li class="menu-item" ng-show="isAuthenticated">
-                <a ui-sref="wallets" class="menu-link">
-                  <span class="menu-icon fas fa-coins"></span>
-                  <span class="menu-text">Coins</span>
-                  <span class="badge badge-warning" ng-cloak>{{global_coins.length}}</span>
                 </a>
                 <!-- /child menu -->
               </li>
