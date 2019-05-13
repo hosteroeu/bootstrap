@@ -1,2 +1,2 @@
 # menoetius
-https://boostrap.hostero.eu
+https://bootstrap.hostero.eu
