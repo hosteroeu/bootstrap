@@ -1,0 +1,54 @@
+<section id="switcher" class="card">
+  <!-- .card-body -->
+  <div class="card-body">
+    <h3 class="card-title"> Dual Mining </h3>
+    <p>WebDollar uses a hybrid mining process, which alternates between POW and POS. During the POS rounds (66% of the time) the CPU is idle. You can deploy a second miner that's going to mine during the idle time.</p>
+  </div>
+  <!-- /.card-body -->
+  <!-- .list-group -->
+  <div class="list-group list-group-flush">
+    <!-- .list-group-item -->
+    <div class="list-group-item d-flex justify-content-between align-items-center">
+      <span>Toggle Dual Mining</span>
+      <!-- .switcher-control -->
+      <label class="switcher-control">
+        <input type="checkbox" class="switcher-input" ng-model="settingsCtrl.account.auto_deploy_idle">
+        <span class="switcher-indicator"></span>
+      </label>
+      <!-- /.switcher-control -->
+    </div>
+    <!-- /.list-group-item -->
+  </div>
+  <!-- /.list-group -->
+
+  <hr />
+
+  <div class="card-body">
+    <h3 class="card-title"> Select Coin </h3>
+    <!-- .section-block -->
+    <div class="section-block text-center text-sm-left">
+      <!-- .visual-picker -->
+      <div class="visual-picker visual-picker-sm has-peek px-3" ng-repeat="coin in global_coins" ng-if="coin.internal_name != 'webdollar'">
+        <!-- visual-picker input -->
+        <input type="radio" id="{{coin.internal_name}}" name="vprSE" value="{{coin.internal_name}}" ng-model="settingsCtrl.account.auto_deploy_coin_idle">
+        <!-- .visual-picker-figure -->
+        <label class="visual-picker-figure" for="{{coin.internal_name}}">
+        <!-- .visual-picker-content -->
+        <span class="visual-picker-content">
+          <figure class="user-avatar user-avatar-sm">
+            <img src="{{coin.logo_url}}" alt="User Avatar">
+          </figure>
+        </span>
+        <!-- /.visual-picker-content -->
+      </label>
+        <!-- /.visual-picker-figure -->
+        <!-- .visual-picker-peek -->
+        <span class="visual-picker-peek">{{coin.name}}</span>
+      </div>
+      <!-- /.visual-picker -->
+    </div>
+    <!-- /.section-block -->
+  </div>
+</section>
+<!-- /.card -->
+<button class="btn btn-primary btn-lg btn-block" ng-click="settingsCtrl.update_dual_mining()">Update</button>

@@ -1,0 +1,237 @@
+<!-- .page -->
+<div class="page" ng-cloak>
+  <!-- .page-inner -->
+  <div class="page-inner">
+    <!-- .page-section -->
+    <div class="page-section">
+      <!--
+      <div class="alert alert-secondary has-icon fade show">
+        <div class="alert-icon">
+          <span class="fa fa-bell"></span>
+        </div>
+        <h4 class="alert-heading">New Coin Added</h4>
+        <p class="mb-0">We are happy to announce we integrated <a href="https://getnerva.org" class="alert-link" target="_blank">Nerva</a> into Hostero. <a ui-sref="coins" class="alert-link">Start Mining Nerva!</a></p>
+      </div>
+      -->
+
+      <!-- .page-title-bar -->
+      <header class="page-title-bar">
+        <p class="lead">
+          <span class="font-weight-bold">Hi, {{profile.name}}</span>
+          <span class="d-block text-muted">Here’s what’s happening with your miners today</span>
+        </p>
+      </header>
+      <!-- /.page-title-bar -->
+
+      <hr />
+
+      <!-- .card -->
+      <div class="card mt-5">
+        <!-- .steps -->
+        <section class="steps steps-float">
+          <ul>
+            <li class="success">
+              <a ui-sref="wallets" tabindex="-1">
+                <span class="step-indicator step-indicator-icon">
+                  <i class="fas fa-wallet"></i>
+                </span>
+                <span class="d-none d-sm-inline">Add Wallet</span>
+              </a>
+            </li>
+            <li class="active">
+              <a href="https://www.hostero.eu/getting-started" target="_blank" tabindex="-1">
+                <span class="step-indicator step-indicator-icon">
+                  <i class="fas fa-download"></i>
+                </span>
+                <span class="d-none d-sm-inline">Install Device</span>
+              </a>
+            </li>
+            <li>
+              <a ui-sref="hosts" tabindex="-1">
+                <span class="step-indicator step-indicator-icon">
+                  <i class="fas fa-plus"></i>
+                </span>
+                <span class="d-none d-sm-inline">Deploy Miner</span>
+              </a>
+            </li>
+            <li>
+              <a ui-sref="miners" tabindex="-1">
+                <span class="step-indicator step-indicator-icon">
+                  <i class="fas fa-th-list"></i>
+                </span>
+                <span class="d-none d-sm-inline">Monitor Miners</span>
+              </a>
+            </li>
+          </ul>
+        </section>
+        <!-- /.steps -->
+        <!-- .card-body -->
+        <div class="card-body">
+          <h4>Run your Miners, easy as &pi;</h4>
+          <hr />
+          <p><a class="tile tile-circle">1</a> Add the wallet for the coin</p>
+          <p><a class="tile tile-circle">2</a> Install Hostero on the device (PC/server)</p>
+          <p><a class="tile tile-circle">3</a> Deploy a miner on the new device</p>
+        </div>
+        <!-- /.card-body -->
+      </div>
+      <!-- /.card -->
+
+      <div class="section-block">
+        <div class="metric-row">
+          <!-- metric column -->
+          <div class="col-12 col-sm-6 col-lg-3">
+            <!-- .metric -->
+            <div class="card-metric">
+              <div class="metric">
+                <p class="metric-value h3">
+                  <sub>
+                    <i class="fas fa-bolt"></i>
+                  </sub>
+                  <span class="value">{{ total_power | hashrate }}</span>
+                </p>
+                <h2 class="metric-label"> Total Hashrate </h2>
+              </div>
+            </div>
+            <!-- /.metric -->
+          </div>
+          <!-- /metric column -->
+          <!-- metric column -->
+          <div class="col-12 col-sm-6 col-lg-3">
+            <!-- .metric -->
+            <div class="card-metric">
+              <div class="metric">
+                <p class="metric-value h3">
+                  <sub>
+                  <i class="fas fa-microchip"></i>
+                </sub>
+                  <span class="value">{{ global_miners.length || 0 }}</span>
+                </p>
+                <h2 class="metric-label"> <a ui-sref="miners">Miners</a> </h2>
+              </div>
+            </div>
+            <!-- /.metric -->
+          </div>
+          <!-- /metric column -->
+          <!-- metric column -->
+          <div class="col-12 col-sm-6 col-lg-3">
+            <!-- .metric -->
+            <div class="card-metric">
+              <div class="metric">
+                <p class="metric-value h3">
+                  <sub>
+                  <i class="fas fa-laptop"></i>
+                </sub>
+                  <span class="value">{{ global_hosts.length || 0 }}</span>
+                </p>
+                <h2 class="metric-label"> <a ui-sref="hosts">Devices</a> </h2>
+              </div>
+            </div>
+            <!-- /.metric -->
+          </div>
+          <!-- /metric column -->
+          <!-- metric column -->
+          <div class="col-12 col-sm-6 col-lg-3">
+            <!-- .metric -->
+            <div class="card-metric">
+              <div class="metric">
+                <p class="metric-value h3">
+                  <sub>
+                  <i class="fas fa-coins"></i>
+                </sub>
+                  <span class="value">{{ global_coins.length }}</span>
+                </p>
+                <h2 class="metric-label"> <a ui-sref="wallets">Coins</a> </h2>
+              </div>
+            </div>
+            <!-- /.metric -->
+          </div>
+          <!-- /metric column -->
+        </div>
+        <!-- /metric row -->
+
+        <!-- metric row -->
+        <div class="metric-row">
+          <!-- metric column -->
+          <div class="col-6">
+            <!-- .card -->
+            <section class="card card-fluid">
+              <!-- .list-group -->
+              <div class="list-group list-group-flush list-group-divider">
+                <a class="list-group-item list-group-item-action" ng-repeat="log in logs | limitTo:4">
+                  <div class="list-group-item-figure">
+                    <div class="tile">
+                      <span class="fa fa-info"></span>
+                    </div>
+                  </div>
+                  <div class="list-group-item-body">
+                    <h4 class="list-group-item-title"> {{ log.message }} </h4>
+                    <h5 class="list-group-item-subtitle"> {{ log.created_at | timeAgo }} </h5>
+                    <p class="list-group-item-text text-truncate">
+                      <span ng-repeat="extra in log.extra_message_curated">
+                        <span class="badge badge-subtle badge-dark">{{ extra }}</span>
+                      </span>
+                    </p>
+                  </div>
+                </a>
+                <a class="list-group-item list-group-item-action" ng-if="!logs.length">
+                  <div class="list-group-item-body">
+                    No activity.
+                  </div>
+                </a>
+              </div>
+              <!-- /.list-group -->
+            </section>
+            <!-- /.card -->
+          </div>
+          <!-- /metric column -->
+          <!-- metric column -->
+          <div class="col-6">
+            <!-- .card -->
+            <section class="card card-fluid">
+              <iframe ng-src="{{ getIframeSrcAlt(5, 'now-1h') }}" width="100%" height="300" frameborder="0"></iframe>
+            </section>
+            <!-- /.card -->
+          </div>
+          <!-- /metric column -->
+        </div>
+        <!-- /metric row -->
+
+        <!-- metric row -->
+        <div class="metric-row">
+          <!-- metric column -->
+          <div class="col-12">
+            <!-- .card -->
+            <section class="card card-fluid">
+              <iframe ng-src="{{ getIframeSrcAlt(3) }}" width="100%" height="300" frameborder="0"></iframe>
+            </section>
+            <!-- /.card -->
+          </div>
+          <!-- /metric column -->
+        </div>
+        <!-- /metric row -->
+
+        <!-- metric row -->
+        <div class="metric-row" ng-if="show_wmp_chart">
+          <!-- metric column -->
+          <div class="col-12">
+            <!-- .card -->
+            <section class="card card-fluid">
+              <iframe ng-src="{{ getIframeSrcAlt2(1, wallet_webdollar) }}" width="100%" height="300" frameborder="0"></iframe>
+            </section>
+            <!-- /.card -->
+          </div>
+          <!-- /metric column -->
+        </div>
+        <!-- /metric row -->
+
+        <!--
+        <p ng-if="!show_wmp_chart"><strong>Note:</strong> More charts are exclusively available for WebDollar miners running on the <a href="https://www.webdollarminingpool.com" target="_blank">WMP</a> pool.</p>
+        -->
+      </div>
+    </div>
+    <!-- /.page-section -->
+  </div>
+  <!-- /.page-inner -->
+</div>
+<!-- /.page -->

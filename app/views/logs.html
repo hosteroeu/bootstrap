@@ -1,0 +1,19 @@
+<!-- .page -->
+<div class="page">
+  <div class="page-message" ng-if="error" ng-cloak>
+    <i class="fa fa-fw fa-bell"></i> {{error}}
+  </div>
+
+  <!-- .page-inner -->
+  <div class="page-inner" ng-if="!error">
+    <small>
+      <ul class="logs_list">
+        <li ng-repeat="log in logs | limitTo:10000">
+          <div ng-bind-html="to_trusted(log.message)"></div>
+        </li>
+      </ul>
+    </small>
+  </div>
+  <!-- /.page-inner -->
+</div>
+<!-- /.page -->

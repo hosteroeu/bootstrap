@@ -1,0 +1,77 @@
+<!-- .page -->
+<div class="page">
+  <!-- .page-inner -->
+  <div class="page-inner">
+    <!-- .page-title-bar -->
+    <header class="page-title-bar">
+      <!-- title and toolbar -->
+      <div class="d-md-flex align-items-md-start">
+        <h1 class="page-title mr-sm-auto"> {{nodes.length || 0}} Nodes </h1>
+      </div>
+      <!-- /title and toolbar -->
+    </header>
+    <!-- /.page-title-bar -->
+
+    <!-- .page-section -->
+    <section class="card card-fluid">
+      <div class="card-body" ng-if="nodes != null && !nodes.length">
+        No nodes.
+      </div>
+
+      <div ng-if="nodes == null">
+        <center>
+          <br />
+          <p><img src="images/loading.gif" /></p>
+        </center>
+      </div>
+
+      <div class="table-responsive" ng-if="nodes != null && nodes.length">
+        <table class="table table-hover" datatable="ng" dt-options="dt_options">
+          <thead class="thead-light">
+            <tr>
+              <th>Node</th>
+              <th>Coin</th>
+              <th>Type</th>
+              <th>Updated</th>
+              <th>&nbsp;</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="host in nodes">
+              <td>
+                <div class="tile bg-success">
+                  <i class="fa fa-network-wired"></i>
+                </div>
+                &nbsp; {{ host.name | limitTo:100 }}
+              </td>
+              <td>
+                <a ui-sref="wallets.wallet({wallet: 'webdollar'})">WebDollar</a>
+              </td>
+              <td>
+                Proof Of Stake
+              </td>
+              <td>
+                {{ host.updated_at | timeAgo }}
+              </td>
+              <td class="align-middle text-right">
+                <a ui-sref="new_miner_pos({host:host.id})" ng-if="global_miners.length < (global_account.plan_miners + global_account.bonus_miners)" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="top" title="Deploy WebDollar POS">
+                  <i class="fas fa-plus"></i>
+                  <span class="sr-only">Deploy WebDollar POS</span>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <div class="alert alert-secondary has-icon" role="alert">
+      <div class="alert-icon">
+        <span class="fa fa-info"></span>
+      </div>
+      <strong>Need help?</strong><br /> Check out our <a href="https://www.hostero.eu/docs/webdollar-pos-mining" class="alert-link" target="_blank">guide</a> for configuring the Proof-of-Stake miner for WebDollar.
+    </div>
+  </div>
+  <!-- /.page-inner -->
+</div>
+<!-- /.page -->

@@ -1,0 +1,44 @@
+<!-- .page -->
+<div class="page">
+  <!-- .page-inner -->
+  <div class="page-inner">
+    <!-- .page-title-bar -->
+    <header class="page-title-bar">
+      <h1 class="page-title">Deploy WebDollar Miner (POS)</h1>
+    </header>
+    <!-- /.page-title-bar -->
+    <!-- .page-section -->
+    <div class="page-section">
+      <div class="card card-fluid">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="form-group">
+                <label for="host">Device</label>
+                <select class="custom-select" id="host" required="required" ng-model="ctrl.selected_host_id" ng-change="ctrl.update_threads()">
+                  <option ng-repeat="host in ctrl.hosts | filter:{user_id: 'shared'}" value="{{host.id}}">{{host.name}}</option>
+                  <option value="">Choose...</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div ng-include src="'views/wallets/' + ctrl.wallets.auto_deploy_coin + '.html'"></div>
+
+          <hr class="my-5" />
+          <div class="row">
+            <div class="col-sm">
+              <button class="btn btn-outline-secondary btn-lg btn-block" ui-sref="miners">Cancel</button>
+            </div>
+            <div class="col-sm">
+              <button class="btn btn-primary btn-lg btn-block" ng-click="ctrl.deploy()">Deploy</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.page-section -->
+  </div>
+  <!-- /.page-inner -->
+</div>
+<!-- /.page -->

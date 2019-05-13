@@ -1,0 +1,93 @@
+<!-- .page -->
+<div class="page">
+  <!-- .page-inner -->
+  <div class="page-inner">
+    <!-- .page-section -->
+    <div class="page-section">
+      <div class="row">
+        <!-- grid column -->
+        <div class="col-lg-4">
+          <!-- .card -->
+          <div class="card card-fluid">
+            <h6 class="card-header">Settings</h6>
+            <!-- .nav -->
+            <nav class="nav nav-tabs flex-column">
+              <a ui-sref="settings" class="nav-link" ng-class="{active: settingsCtrl.state.current.name == 'settings'}">General</a>
+              <a ui-sref="settings.auto_deploy" class="nav-link" ng-class="{active: settingsCtrl.state.current.name == 'settings.auto_deploy'}">Auto Deploy</a>
+              <a ui-sref="settings.dual_mining" class="nav-link" ng-class="{active: settingsCtrl.state.current.name == 'settings.dual_mining'}">Dual Mining</a>
+              <!--<a ui-sref="wallets" class="nav-link">Billing</a>-->
+              <!--<a ui-sref="wallets" class="nav-link">Notifications</a>-->
+            </nav>
+            <!-- /.nav -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /grid column -->
+        <!-- grid column -->
+        <div class="col-lg-8">
+          <div ng-if="settingsCtrl.state.current.name == 'settings'">
+            <section id="switcher" class="card">
+              <!-- .card-body -->
+              <div class="card-body">
+                <h3 class="card-title"> Processor Flags </h3>
+                <p>Miners are going to optimized for the flag you select. Newer processors support AVX2 flags, whereas old ones support SSE2.</p>
+              </div>
+              <!-- /.card-body -->
+
+              <!-- .section-block -->
+              <div class="section-block text-center text-sm-left">
+                <!-- .visual-picker -->
+                <div class="visual-picker visual-picker-sm has-peek px-3">
+                  <!-- visual-picker input -->
+                  <input type="radio" id="avx2" name="processor" value="avx2" ng-model="settingsCtrl.account.default_processor">
+                  <!-- .visual-picker-figure -->
+                  <label class="visual-picker-figure" for="avx2">
+                    <!-- .visual-picker-content -->
+                    <span class="visual-picker-content">
+                      <span class="tile tile-sm bg-gray">
+                        <i class="fa fa-microchip"></i>
+                      </span>
+                    </span>
+                    <!-- /.visual-picker-content -->
+                  </label>
+                  <!-- /.visual-picker-figure -->
+                  <!-- .visual-picker-peek -->
+                  <span class="visual-picker-peek">AVX2</span>
+                </div>
+                <!-- /.visual-picker -->
+                <!-- .visual-picker -->
+                <div class="visual-picker visual-picker-sm has-peek px-3">
+                  <!-- visual-picker input -->
+                  <input type="radio" id="sse2" name="processor" value="sse2" ng-model="settingsCtrl.account.default_processor">
+                  <!-- .visual-picker-figure -->
+                  <label class="visual-picker-figure" for="sse2">
+                    <!-- .visual-picker-content -->
+                    <span class="visual-picker-content">
+                      <span class="tile tile-sm bg-gray">
+                        <i class="fa fa-microchip"></i>
+                      </span>
+                    </span>
+                    <!-- /.visual-picker-content -->
+                  </label>
+                  <!-- /.visual-picker-figure -->
+                  <!-- .visual-picker-peek -->
+                  <span class="visual-picker-peek">SSE2</span>
+                </div>
+                <!-- /.visual-picker -->
+              </div>
+              <!-- /.section-block -->
+            </section>
+            <!-- /.card -->
+            <button class="btn btn-primary btn-lg btn-block" ng-click="settingsCtrl.update_settings()">Update</button>
+          </div>
+
+          <div ng-if="settingsCtrl.state.current.name != 'settings'">
+            <div ui-view></div>
+          </div>
+        </div>
+      </div>
+      <!-- /.page-section -->
+    </div>
+    <!-- /.page-inner -->
+  </div>
+  <!-- /.page -->

@@ -1,0 +1,98 @@
+<!-- .page -->
+<div class="page">
+  <!-- .page-inner -->
+  <div class="page-inner">
+    <!-- .page-section -->
+    <div class="page-section">
+      <div class="row">
+        <!-- grid column -->
+        <div class="col-lg-4">
+          <!-- .card -->
+          <div class="card card-fluid">
+            <h6 class="card-header"> Coins </h6>
+            <div ng-if="!global_coins">
+              <center>
+                <p><img src="images/loading.gif" /></p>
+              </center>
+            </div>
+            <!-- .nav -->
+            <nav class="nav nav-tabs flex-column">
+              <!--<a ui-sref="wallets" class="nav-link" ng-class="{active: ctrl.state.current.name == 'wallets'}">General</a>-->
+              <a ui-sref="wallets.wallet({wallet:coin.internal_name})" class="nav-link" ng-repeat="coin in global_coins" ng-class="{active: ctrl.state.params.wallet == coin.internal_name}">
+                <figure class="user-avatar user-avatar-xs">
+                  <img src="{{coin.logo_url}}" alt="User Avatar">
+                </figure>
+                {{coin.name}} ({{coin.short_name}})
+              </a>
+            </nav>
+            <!-- /.nav -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /grid column -->
+        <!-- grid column -->
+        <div class="col-lg-8">
+          <div ng-if="ctrl.state.current.name === 'wallets'">
+            <!-- .card -->
+            <section id="labels" class="card">
+              <!-- .card-body -->
+              <div class="card-body">
+                <h5>Select a coin from the left side</h5>
+                <br />
+                <p>The default coin is <a ui-sref="wallets.wallet({wallet:ctrl.wallets.auto_deploy_coin})">{{ctrl.wallets.auto_deploy_coin | ucfirst}}</a>. You can change it on the <a ui-sref="settings.auto_deploy">Settings</a> section.</p>
+                <p>View the complete list of <a href="https://www.hostero.eu/cpu-mineable-coins" target="_blank">CPU Mineable Coins</a>.</p>
+              </div>
+              <!-- /.card-body -->
+            </section>
+            <!-- /.card -->
+          </div>
+          <div ng-if="ctrl.state.current.name !== 'wallets'">
+            <!-- .page-navs -->
+            <nav class="page-navs">
+              <!-- .nav-scroller -->
+              <div class="nav-scroller">
+                <!-- .nav -->
+                <div class="nav nav-tabs">
+                  <a class="nav-link" ui-sref="wallets.wallet({miner: miner.id})" ng-class="{active: ctrl.state.current.name === 'wallets.wallet'}">Wallet</a>
+                  <a class="nav-link" ui-sref="wallets.miner({miner: miner.id})" ng-class="{active: ctrl.state.current.name === 'wallets.miner'}">Miner</a>
+                  <a class="nav-link" href="https://www.hostero.eu/coins/{{ctrl.state.params.wallet}}" target="_blank">Benchmarks</a>
+                </div>
+                <!-- /.nav -->
+              </div>
+              <!-- /.nav-scroller -->
+            </nav>
+            <!-- /.page-navs -->
+
+            <div ng-if="ctrl.state.current.name === 'wallets.miner'">
+              <!-- .card -->
+              <section id="labels" class="card">
+                <!-- .card-body -->
+                <div class="card-body">
+                  <p>Type: <strong>Pool Miner</strong></p>
+                  <p>Image: <a href="{{ctrl.get_coin(ctrl.state.params.wallet).docker_url}}" target="_blank">{{ctrl.get_coin(ctrl.state.params.wallet).docker_image}}</a></p>
+                </div>
+                <!-- /.card-body -->
+              </section>
+              <!-- /.card -->
+            </div>
+
+            <div ng-if="ctrl.state.current.name === 'wallets.wallet'">
+              <!-- .card -->
+              <section id="labels" class="card">
+                <!-- .card-body -->
+                <div class="card-body">
+                  <div ng-include src="'views/wallets/' + ctrl.state.params.wallet + '.html'"></div>
+                </div>
+                <!-- /.card-body -->
+              </section>
+              <!-- /.card -->
+              <button class="btn btn-primary btn-lg btn-block" ng-click="ctrl.update()">Update</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.page-section -->
+    </div>
+    <!-- /.page-inner -->
+  </div>
+  <!-- /.page -->

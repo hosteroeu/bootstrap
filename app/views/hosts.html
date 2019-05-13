@@ -1,0 +1,109 @@
+<!-- .page -->
+<div class="page">
+  <!-- .page-inner -->
+  <div class="page-inner">
+    <!-- .page-title-bar -->
+    <header class="page-title-bar">
+      <!-- floating action -->
+      <button type="button" class="btn btn-success btn-floated" ui-sref="install">
+        <span class="fa fa-download"></span>
+      </button>
+      <!-- /floating action -->
+      <!-- title and toolbar -->
+      <div class="d-md-flex align-items-md-start">
+        <h1 class="page-title mr-sm-auto"> {{hosts.length || 0}} Devices </h1>
+        <!-- .btn-toolbar -->
+        <div class="btn-toolbar">
+          <div class="dropdown">
+            <button type="button" class="btn btn-light" data-toggle="dropdown">
+              <span>Batch</span>
+              <span class="caret"></span>
+            </button>
+            <div class="dropdown-arrow dropdown-arrow-right"></div>
+            <div class="dropdown-menu dropdown-menu-right">
+              <a href="" class="dropdown-item" ng-click="hostsCtrl.redeploy_all()">Re-deploy All Devices</a>
+            </div>
+          </div>
+        </div>
+        <!-- /.btn-toolbar -->
+      </div>
+      <!-- /title and toolbar -->
+    </header>
+    <!-- /.page-title-bar -->
+
+    <!-- .page-section -->
+    <section class="card card-fluid">
+      <div class="card-body" ng-if="hosts != null && !hosts.length">
+        You have not installed any devices. <a href="https://www.hostero.eu/getting-started" target="_blank">Install a device</a>.
+      </div>
+
+      <div ng-if="hosts == null">
+        <center>
+          <br />
+          <p><img src="images/loading.gif" /></p>
+        </center>
+      </div>
+
+      <div class="table-responsive" ng-if="hosts != null && hosts.length">
+        <table class="table table-hover" datatable="ng" dt-options="dt_options">
+          <thead class="thead-light">
+            <tr>
+              <th>Device</th>
+              <th>Status</th>
+              <th>CPUs</th>
+              <th class="d-none d-lg-block">Frequency</th>
+              <th>Updated</th>
+              <th>&nbsp;</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="host in hosts">
+              <td>
+                <div class="tile bg-success">
+                  <i class="fa fa-{{hostsCtrl.get_status_icon(host.status)}}"></i>
+                </div>
+                &nbsp;
+                <a ui-sref="host({host:host.id})">{{ host.name | limitTo:100 }}</a>
+              </td>
+              <td>
+                <span ng-if="host.deployed == 0 && host.status == 'started'">Ready</span>
+                <span ng-if="host.deployed == 1 && host.status == 'started'">Deployed</span>
+                <span ng-if="host.deployed == 2 && host.status == 'started'">Deploying...</span>
+                <span ng-if="host.status == 'stopped'">Stopped</span>
+              </td>
+              <td>
+                {{host.cpu_count}}
+              </td>
+              <td class="d-none d-lg-block">
+                {{host.cpu_mhz | number:0}} Mhz
+              </td>
+              <td>
+                {{ host.updated_at | timeAgo }}
+              </td>
+              <td class="align-middle text-right">
+                <a ui-sref="new_miner({host:host.id})" ng-if="host.deployed == 0 && host.status == 'started' && global_miners.length < (global_account.plan_miners + global_account.bonus_miners)" class="btn btn-sm btn-info" data-toggle="tooltip" data-placement="top" title="Deploy">
+                  <i class="fas fa-plus"></i>
+                  <span class="sr-only">Deploy</span>
+                </a>
+
+                <a ng-click="hostsCtrl.remove(host)" class="btn btn-sm btn-secondary" data-toggle="tooltip" data-placement="top" title="Re-deploy">
+                  <i class="fas fa-recycle"></i>
+                  <span class="sr-only">Re-deploy</span>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <div class="alert alert-secondary has-icon" role="alert">
+      <div class="alert-icon">
+        <span class="fa fa-info"></span>
+      </div>
+      <strong>Need help?</strong><br /> Check out our <a href="https://www.hostero.eu/universal-miner" class="alert-link" target="_blank">guide</a> for installing the Universal Miner.
+    </div>
+  </div>
+  <!-- /.page-inner -->
+</div>
+<!-- /.page -->

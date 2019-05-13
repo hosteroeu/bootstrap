@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- End Required meta tags -->
+  <!-- Begin SEO tag -->
+  <title>Hostero Dashboard</title>
+  <meta name="author" content="Hostero">
+  <meta name="description" content="Start mining cryptocurrency in a few minutes. Mining software for CPU mineable cryptocurrencies.">
+  <meta property="og:title" content="Hostero Dashboard">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:description" content="Start mining cryptocurrency in a few minutes. Mining software for CPU mineable cryptocurrencies.">
+  <meta property="og:url" content="https://dashboard.hostero.eu/">
+  <meta property="og:site_name" content="Hostero Dashboard">
+  <link rel="canonical" href="https://dashboard.hostero.eu/">
+  <!-- FAVICONS -->
+  <link rel="shortcut icon" href="favicon.ico">
+  <meta name="theme-color" content="#3063A0">
+  <!-- End FAVICONS -->
+
+  <!-- build:css(.) styles/vendor.css -->
+  <!-- bower:css -->
+  <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css" />
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+  <link rel="stylesheet" href="bower_components/font-awesome/css/all.css" />
+  <link rel="stylesheet" href="bower_components/PACE/themes/blue/pace-theme-flash.css" />
+  <link rel="stylesheet" href="bower_components/datatables/media/css/jquery.dataTables.css" />
+  <link rel="stylesheet" href="bower_components/datatables/media/css/dataTables.bootstrap.css" />
+  <link rel="stylesheet" href="bower_components/datatables.net-dt/css/jquery.dataTables.css" />
+  <link rel="stylesheet" href="bower_components/angular-datatables/dist/css/angular-datatables.css" />
+  <link rel="stylesheet" href="bower_components/angular-datatables/dist/plugins/bootstrap/datatables.bootstrap.min.css" />
+  <link rel="stylesheet" href="bower_components/toastr/toastr.css" />
+  <!-- endbower -->
+  <!-- endbuild -->
+  <!-- build:css(.tmp) styles/main.css -->
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/looper.css">
+  <link rel="stylesheet" href="styles/looper_custom.css">
+  <!-- endbuild -->
+</head>
+
+<body ng-app="atlasApp" ng-controller="RootCtrl as rootCtrl">
+  <!-- .app -->
+  <div class="app" ng-class="{'has-fullwidth': minimalLayout}">
+    <!-- .app-header -->
+    <header class="app-header" ng-hide="minimalLayout">
+      <!-- .top-bar -->
+      <div class="top-bar">
+        <!-- .top-bar-brand -->
+        <div class="top-bar-brand">
+          <a ui-sref="dashboard">
+            <img src="images/hostero_logo_white_small.png" height="32" alt="">
+            Dashboard
+          </a>
+        </div>
+        <!-- /.top-bar-brand -->
+        <!-- .top-bar-list -->
+        <div class="top-bar-list" ng-show="isAuthenticated" ng-cloak>
+          <!-- .top-bar-item -->
+          <div class="top-bar-item px-2 d-md-none d-lg-none d-xl-none">
+            <!-- toggle menu -->
+            <button class="hamburger hamburger-squeeze" type="button" data-toggle="aside" aria-label="Menu" aria-controls="navigation">
+                <span class="hamburger-box">
+                  <span class="hamburger-inner"></span>
+                </span>
+              </button>
+            <!-- /toggle menu -->
+          </div>
+          <!-- /.top-bar-item -->
+          <!-- .top-bar-item -->
+          <div class="top-bar-item top-bar-item-full" ng-cloak>
+            Account:&nbsp;<span class="badge badge-lg badge-info"><a ui-sref="account">{{global_account.name}}</a></span> &nbsp;&nbsp;&nbsp;&nbsp;
+            <i class="fas fa-bolt"></i>&nbsp;Total Hashrate: {{total_power | hashrate}}
+          </div>
+          <!-- /.top-bar-item -->
+          <!-- .top-bar-item -->
+          <div class="top-bar-item top-bar-item-right px-0 d-none d-sm-flex">
+            <!-- .nav -->
+            <ul class="header-nav nav">
+              <!-- .nav-item -->
+              <li class="nav-item dropdown header-nav-dropdown">
+                <a class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="fa fa-bell"></span>
+                  </a>
+                <div class="dropdown-arrow"></div>
+                <!-- .dropdown-menu -->
+                <div class="dropdown-menu dropdown-menu-rich dropdown-menu-right">
+                  <h6 class="dropdown-header stop-propagation">
+                      <span>Events
+                        <!--<span class="badge">(2)</span>-->
+                      </span>
+                    </h6>
+                  <!-- .dropdown-scroll -->
+                  <div class="dropdown-scroll has-scrollable">
+                    <!-- .dropdown-item -->
+                    <a class="dropdown-item unread" ng-repeat="event in global_events">
+                      <div class="tile">
+                        <span class="fa fa-info"></span>
+                      </div>
+                      <div class="dropdown-item-body">
+                        <p class="text">{{event.message}}</p>
+                        <span class="date">{{event.created_at | timeAgo}}</span>
+                      </div>
+                    </a>
+                    <!-- /.dropdown-item -->
+                  </div>
+                  <!-- /.dropdown-scroll -->
+
+                  <a ui-sref="events" class="dropdown-footer">All events
+                    <i class="fa fa-fw fa-long-arrow-alt-right"></i>
+                  </a>
+                </div>
+                <!-- /.dropdown-menu -->
+              </li>
+              <!-- /.nav-item -->
+              <!-- .nav-item -->
+              <!--<li class="nav-item dropdown header-nav-dropdown has-notified">-->
+              <li class="nav-item dropdown header-nav-dropdown">
+                <a class="nav-link" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <span class="fa fa-dollar-sign"></span>
+                </a>
+                <div class="dropdown-arrow"></div>
+                <!-- .dropdown-menu -->
+                <div class="dropdown-menu dropdown-menu-rich dropdown-menu-right">
+                  <!-- .dropdown-sheets -->
+                  <div class="dropdown-sheets">
+                    <!-- .dropdown-sheet-item -->
+                    <div class="dropdown-sheet-item" ng-repeat="coin in global_coins">
+                      <a ui-sref="wallets.wallet({wallet:coin.internal_name})" class="tile-wrapper">
+                        <figure class="user-avatar user-avatar-sm">
+                          <img src="{{coin.logo_url}}" alt="User Avatar">
+                        </figure>
+                        <span class="tile-peek">
+                          {{coin.name}}
+                        </span>
+                      </a>
+                    </div>
+                    <!-- /.dropdown-sheet-item -->
+                  </div>
+                  <!-- .dropdown-sheets -->
+                </div>
+                <!-- .dropdown-menu -->
+              </li>
+              <!-- /.nav-item -->
+            </ul>
+            <!-- /.nav -->
+            <!-- .btn-account -->
+            <div class="dropdown">
+              <button class="btn-account d-none d-md-flex" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="user-avatar">
+                  <img ng-src="{{profile.picture}}" alt="">
+                </span>
+                <span class="account-summary pr-lg-4 d-none d-lg-block">
+                  <span class="account-name">{{profile.name}}</span>
+                  <span class="account-description">{{profile.email}}</span>
+                </span>
+              </button>
+              <div class="dropdown-arrow dropdown-arrow-left"></div>
+              <!-- .dropdown-menu -->
+              <div class="dropdown-menu">
+                <h6 class="dropdown-header d-none d-md-block d-lg-none"> {{profile.name}} </h6>
+                <a class="dropdown-item" ui-sref="account">
+                  <span class="dropdown-icon oi oi-person"></span> Account</a>
+                <a class="dropdown-item" href="" ng-click="authService.logout()">
+                  <span class="dropdown-icon oi oi-account-logout"></span> Logout</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="https://www.hostero.eu/getting-started" target="_blank">Help Center</a>
+              </div>
+              <!-- /.dropdown-menu -->
+            </div>
+            <!-- /.btn-account -->
+          </div>
+          <!-- /.top-bar-item -->
+        </div>
+        <!-- /.top-bar-list -->
+      </div>
+      <!-- /.top-bar -->
+    </header>
+    <!-- /.app-header -->
+    <!-- .app-aside -->
+    <aside class="app-aside" ng-hide="minimalLayout">
+      <!-- .aside-content -->
+      <div class="aside-content">
+        <!-- .aside-header -->
+        <header class="aside-header d-block d-md-none">
+          <!-- .btn-account -->
+          <button class="btn-account" type="button" data-toggle="collapse" data-target="#dropdown-aside">
+            <span class="user-avatar user-avatar-lg">
+              <img ng-src="{{profile.picture}}" alt="">
+            </span>
+            <span class="account-icon">
+              <span class="fa fa-caret-down fa-lg"></span>
+            </span>
+            <span class="account-summary">
+              <span class="account-name">{{profile.name}}</span>
+              <span class="account-description">{{profile.email}}</span>
+            </span>
+          </button>
+          <!-- /.btn-account -->
+          <!-- .dropdown-aside -->
+          <div id="dropdown-aside" class="dropdown-aside collapse">
+            <!-- dropdown-items -->
+            <div class="pb-3">
+              <a class="dropdown-item" ui-sref="account">
+                <span class="dropdown-icon oi oi-person"></span> Account</a>
+              <a class="dropdown-item" href="" ng-click="authService.logout()">
+                <span class="dropdown-icon oi oi-account-logout"></span> Logout</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="https://www.hostero.eu/getting-started">Help Center</a>
+            </div>
+            <!-- /dropdown-items -->
+          </div>
+          <!-- /.dropdown-aside -->
+        </header>
+        <!-- /.aside-header -->
+        <!-- .aside-menu -->
+        <section class="aside-menu has-scrollable">
+          <!-- .stacked-menu -->
+          <nav id="stacked-menu" class="stacked-menu">
+            <!-- .menu -->
+            <ul class="menu">
+              <!-- .menu-item -->
+              <li class="menu-item" ng-if="isAuthenticated">
+                <a ui-sref="dashboard" class="menu-link">
+                  <span class="menu-icon fas fa-tachometer-alt"></span>
+                  <span class="menu-text">Home</span>
+                </a>
+              </li>
+              <!-- /.menu-item -->
+              <!-- .menu-item -->
+              <li class="menu-item" ng-if="isAuthenticated">
+                <a href="https://www.hostero.eu/getting-started" target="_blank" class="menu-link">
+                  <span class="menu-icon fas fa-download"></span>
+                  <span class="menu-text">Install</span>
+                  <span class="badge">1 minute</span>
+                </a>
+                <!-- /child menu -->
+              </li>
+              <!-- /.menu-item -->
+              <!-- .menu-item -->
+              <li class="menu-item">
+                <a ui-sref="login" class="menu-link" ng-if="!isAuthenticated">
+                  <span class="menu-icon fas fa-sign-in-alt"></span>
+                  <span class="menu-text">Login</span>
+                </a>
+                <!-- /child menu -->
+              </li>
+              <!-- /.menu-item -->
+              <!-- .menu-header -->
+              <li class="menu-header" ng-if="isAuthenticated">Management </li>
+              <!-- /.menu-header -->
+              <!-- .menu-item -->
+              <li class="menu-item" ng-if="isAuthenticated">
+                <a ui-sref="settings" class="menu-link">
+                  <span class="menu-icon fas fa-cog"></span>
+                  <span class="menu-text">Settings</span>
+                </a>
+                <!-- /child menu -->
+              </li>
+              <!-- /.menu-item -->
+              <!-- .menu-item -->
+              <li class="menu-item" ng-if="isAuthenticated">
+                <a ui-sref="billing" class="menu-link">
+                  <span class="menu-icon fas fa-wallet"></span>
+                  <span class="menu-text">Billing</span>
+                </a>
+                <!-- /child menu -->
+              </li>
+              <!-- /.menu-item -->
+              <!-- .menu-item -->
+              <li class="menu-item" ng-show="isAuthenticated">
+                <a ui-sref="wallets" class="menu-link">
+                  <span class="menu-icon fas fa-coins"></span>
+                  <span class="menu-text">Coins</span>
+                  <span class="badge badge-warning" ng-cloak>{{global_coins.length}}</span>
+                </a>
+                <!-- /child menu -->
+              </li>
+              <!-- /.menu-item -->
+              <!-- .menu-header -->
+              <li class="menu-header" ng-if="isAuthenticated">Staking </li>
+              <!-- /.menu-header -->
+              <!-- .menu-item -->
+              <li class="menu-item" ng-if="isAuthenticated">
+                <a ui-sref="nodes" class="menu-link">
+                  <span class="menu-icon fas fa-network-wired"></span>
+                  <span class="menu-text">Nodes</span>
+                  <span class="badge badge-success" ng-cloak>{{global_nodes.length}}</span>
+                </a>
+              </li>
+              <!-- /.menu-item -->
+              <!-- .menu-header -->
+              <li class="menu-header" ng-if="isAuthenticated">Mining </li>
+              <!-- /.menu-header -->
+              <!-- .menu-item -->
+              <li class="menu-item" ng-if="isAuthenticated">
+                <a ui-sref="hosts" class="menu-link">
+                  <span class="menu-icon fas fa-laptop"></span>
+                  <span class="menu-text">Devices</span>
+                  <span class="badge badge-success" ng-cloak>{{global_hosts.length}}</span>
+                </a>
+              </li>
+              <!-- /.menu-item -->
+              <!-- .menu-item -->
+              <li class="menu-item" ng-if="isAuthenticated">
+                <a ui-sref="miners" class="menu-link">
+                  <span class="menu-icon fas fa-microchip"></span>
+                  <span class="menu-text">Miners</span>
+                  <span class="badge badge-success" ng-cloak>{{global_miners.length}}</span>
+                </a>
+              </li>
+              <!-- /.menu-item -->
+            </ul>
+            <!-- /.menu -->
+          </nav>
+          <!-- /.stacked-menu -->
+        </section>
+        <!-- /.aside-menu -->
+      </div>
+      <!-- /.aside-content -->
+    </aside>
+    <!-- /.app-aside -->
+
+    <!-- .app-main -->
+    <main class="app-main">
+      <span ng-if="global_state.current.name != 'install' && global_state.current.name != 'logs'">
+        <div class="page-message" ng-if="global_account.email === 'demo@hostero.eu'" ng-cloak>
+          <i class="fa fa-fw fa-bell"></i> You are on the demo account, the data is restored every hour. If you want to create an account, you need to <a href="" ng-click="authService.logout()" class="alert-link">Logout</a>.
+        </div>
+
+        <div class="page-message" ng-if="global_miners.length > (global_account.plan_miners + global_account.bonus_miners)" ng-cloak>
+          <i class="fa fa-fw fa-bell"></i> <a ui-sref="billing" class="alert-link">Upgrade</a> your account or remove some miners to avoid termination!
+        </div>
+
+        <div class="page-message" ng-if="global_miners.length == (global_account.plan_miners + global_account.bonus_miners)" ng-cloak>
+          <i class="fa fa-fw fa-bell"></i> <a ui-sref="billing" class="alert-link">Upgrade</a> your account if you want to create more miners.
+        </div>
+      </span>
+
+      <!-- .wrapper -->
+      <div class="wrapper" ui-view>
+      </div>
+      <!-- .app-footer -->
+      <footer class="app-footer" ng-hide="minimalLayout">
+        <ul class="list-inline">
+          <li class="list-inline-item">
+            <a class="text-muted" href="https://status.hostero.eu" target="_blank">Service Status</a>
+          </li>
+          <li class="list-inline-item">
+            <a class="text-muted" href="https://www.hostero.eu/getting-started" target="_blank">Help Center</a>
+          </li>
+        </ul>
+        <div class="copyright"> Copyright &copy; 2019. All right reserved. </div>
+      </footer>
+      <!-- /.app-footer -->
+      <!-- /.wrapper -->
+    </main>
+    <!-- /.app-main -->
+  </div>
+  <!-- /.app -->
+
+  <!-- build:js(.) scripts/vendor.js -->
+  <!-- bower:js -->
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.js"></script>
+  <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+  <script src="bower_components/angular-messages/angular-messages.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+  <script src="bower_components/auth0-lock/build/lock.js"></script>
+  <script src="bower_components/auth0.js/dist/auth0.js"></script>
+  <script src="bower_components/angular-lock/angular-lock.js"></script>
+  <script src="bower_components/angular-jwt/dist/angular-jwt.js"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="bower_components/angular-filter/dist/angular-filter.js"></script>
+  <script src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
+  <script src="bower_components/ansi-to-html/ansi2html.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.bundle.js"></script>
+  <script src="bower_components/PACE/pace.js"></script>
+  <script src="bower_components/datatables/media/js/jquery.dataTables.js"></script>
+  <script src="bower_components/datatables/media/js/dataTables.bootstrap4.js"></script>
+  <script src="bower_components/popper.js/dist/umd/popper.js"></script>
+  <script src="bower_components/angular-timeago/dist/angular-timeago.js"></script>
+  <script src="bower_components/datatables.net/js/jquery.dataTables.js"></script>
+  <script src="bower_components/angular-datatables/dist/angular-datatables.js"></script>
+  <script src="bower_components/angular-datatables/dist/plugins/bootstrap/angular-datatables.bootstrap.js"></script>
+  <script src="bower_components/angular-datatables/dist/plugins/colreorder/angular-datatables.colreorder.js"></script>
+  <script src="bower_components/angular-datatables/dist/plugins/columnfilter/angular-datatables.columnfilter.js"></script>
+  <script src="bower_components/angular-datatables/dist/plugins/light-columnfilter/angular-datatables.light-columnfilter.js"></script>
+  <script src="bower_components/angular-datatables/dist/plugins/colvis/angular-datatables.colvis.js"></script>
+  <script src="bower_components/angular-datatables/dist/plugins/fixedcolumns/angular-datatables.fixedcolumns.js"></script>
+  <script src="bower_components/angular-datatables/dist/plugins/fixedheader/angular-datatables.fixedheader.js"></script>
+  <script src="bower_components/angular-datatables/dist/plugins/scroller/angular-datatables.scroller.js"></script>
+  <script src="bower_components/angular-datatables/dist/plugins/tabletools/angular-datatables.tabletools.js"></script>
+  <script src="bower_components/angular-datatables/dist/plugins/buttons/angular-datatables.buttons.js"></script>
+  <script src="bower_components/angular-datatables/dist/plugins/select/angular-datatables.select.js"></script>
+  <script src="bower_components/clipboard/dist/clipboard.js"></script>
+  <script src="bower_components/ngclipboard/dist/ngclipboard.js"></script>
+  <script src="bower_components/toastr/toastr.js"></script>
+  <script src="bower_components/raven-js/dist/raven.js"></script>
+  <!-- endbower -->
+  <!-- endbuild -->
+
+  <!-- build:js({.tmp,app}) scripts/scripts.js -->
+  <script src="scripts/app.js"></script>
+  <script src="scripts/controllers/root.js"></script>
+  <script src="scripts/controllers/dashboard.js"></script>
+  <script src="scripts/controllers/settings.js"></script>
+  <script src="scripts/controllers/coins.js"></script>
+  <script src="scripts/controllers/billing.js"></script>
+  <script src="scripts/controllers/hosts.js"></script>
+  <script src="scripts/controllers/host.js"></script>
+  <script src="scripts/controllers/miners.js"></script>
+  <script src="scripts/controllers/_miner.js"></script>
+  <script src="scripts/controllers/miners.new.js"></script>
+  <script src="scripts/controllers/miners.new_pos.js"></script>
+  <script src="scripts/controllers/login.js"></script>
+  <script src="scripts/controllers/account.js"></script>
+  <script src="scripts/controllers/install.js"></script>
+  <script src="scripts/controllers/wallets.js"></script>
+  <script src="scripts/controllers/logs.js"></script>
+  <script src="scripts/controllers/events.js"></script>
+  <script src="scripts/controllers/nodes.js"></script>
+  <script src="scripts/filters/hashrate.js"></script>
+  <script src="scripts/filters/password.js"></script>
+  <script src="scripts/services/auth.js"></script>
+  <script src="scripts/services/hosts.js"></script>
+  <script src="scripts/services/miners.js"></script>
+  <script src="scripts/services/accounts.js"></script>
+  <script src="scripts/services/logs.js"></script>
+  <script src="scripts/services/payments.js"></script>
+  <script src="scripts/services/coins.js"></script>
+  <script src="scripts/services/api.js"></script>
+  <script src="scripts/vendor/looper/stacked-menu.js"></script>
+  <script src="scripts/vendor/looper/main.js"></script>
+  <!-- endbuild -->
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-128907941-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-128907941-2');
+  </script>
+</body>
+
+</html>

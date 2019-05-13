@@ -1,0 +1,65 @@
+<!-- .page -->
+<div class="page">
+  <!-- .page-title-bar -->
+  <header>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a ui-sref="miners">
+            <i class="breadcrumb-icon fa fa-angle-left mr-2"></i> Back to Miners
+          </a>
+        </li>
+      </ol>
+    </nav>
+  </header>
+  <!-- /.page-title-bar -->
+  <!-- .page-navs -->
+  <nav class="page-navs">
+    <!-- .nav-scroller -->
+    <div class="nav-scroller">
+      <!-- .nav -->
+      <div class="nav nav-tabs">
+        <a class="nav-link" ui-sref="miner({miner: miner.id})" ng-class="{active: state.current.name == 'miner'}">Details</a>
+        <a class="nav-link" ui-sref="miner.charts({miner: miner.id})" ng-class="{active: state.current.name == 'miner.charts'}">Charts</a>
+        <a class="nav-link" ui-sref="miner.logs({miner: miner.id})" ng-class="{active: state.current.name == 'miner.logs'}">Logs</a>
+        <a class="nav-link" ui-sref="miner.events({miner: miner.id})" ng-class="{active: state.current.name == 'miner.events'}">Events</a>
+      </div>
+      <!-- /.nav -->
+    </div>
+    <!-- /.nav-scroller -->
+  </nav>
+  <!-- /.page-navs -->
+  <!-- .page-inner -->
+  <div class="page-inner">
+    <!-- .page-section -->
+    <div class="page-section">
+      <div class="card card-fluid">
+        <div class="card-body">
+          <div ui-view></div>
+
+          <div ng-if="!miner">
+            <center>
+              <p><img src="images/loading.gif" /></p>
+            </center>
+          </div>
+
+          <div ng-if="miner && state.current.name == 'miner'">
+            <h4 class="card-title">{{miner.name}}</h4>
+            <br />
+            <p>Status: <strong>{{ miner.status | ucfirst }}</strong></p>
+            <p>Coin: <strong><a ui-sref="wallets.wallet({wallet: miner.coin})">{{ miner.coin | ucfirst }}</a></strong></p>
+            <p>Device: <strong><a ui-sref="host({host: miner.Host.id})">{{ miner.Host.name }}</a></strong></p>
+            <p ng-if="miner.coin != 'webdollar'">Wallet / Username: <strong>{{ miner.wallet }}</strong></p>
+            <p ng-if="miner.mining_pool_url">Mining Pool: <strong>{{ miner.mining_pool_url }}</strong></p>
+            <p ng-if="miner.password">Password: <strong>{{ miner.password | password }}</strong></p>
+            <p ng-if="miner.coin == 'webdollar'">Wallet: <strong><a ng-href="{{ getHref(miner.wallet) }}" target="_blank">{{ miner.wallet }}</a></strong></p>
+            <p>Threads: <strong>{{ miner.threads }}</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.page-section -->
+  </div>
+  <!-- /.page-inner -->
+</div>
+<!-- /.page -->

@@ -1,0 +1,89 @@
+<!-- .form -->
+<form>
+  <!-- .fieldset -->
+  <fieldset>
+    <!--<legend><a href="https://www.hostero.eu/coins/webdollar" target="_blank">WebDollar</a></legend>-->
+    <!-- .form-group -->
+    <div class="form-group">
+      <label for="lbl3">Mining Pool URL
+      </label>
+      <textarea class="form-control" id="lbl3" rows="3" ng-model="ctrl.wallets.mining_pool_url_webdollar"></textarea>
+    </div>
+    <!-- /.form-group -->
+    <!-- .form-group -->
+    <div class="form-group">
+      <label for="lbl2">Address
+      </label>
+      <input type="text" class="form-control" id="lbl2" ng-model="ctrl.wallets.wallet_webdollar" placeholder="WEBD$000000000000000000000000000000000$">
+    </div>
+    <!-- /.form-group -->
+    <!-- .form-group -->
+    <div class="form-group">
+      <label for="lbl4">Public Key (optional)
+      </label>
+      <input type="text" class="form-control" id="lbl4" ng-model="ctrl.wallets.public_key_webdollar" placeholder="f1684628da9c429dfbe1af6e9d594c1e0a707d52d">
+    </div>
+    <!-- /.form-group -->
+    <!-- .form-group -->
+    <div class="form-group">
+      <label for="lbl5">Private Key (optional)
+      </label>
+      <input type="password" class="form-control" id="lbl5" ng-model="ctrl.wallets.private_key_webdollar" placeholder="29dfbe1af6e9d594c1e0a2bf1684628da9c4a864e707d52d" autocomplete="off">
+    </div>
+    <p><small>Note: Make sure your wallet is not password protected. For staking, also enter the Public and Private keys</small></p>
+    <hr />
+    <!-- /.form-group -->
+    <div class="form-group">
+      <label for="lbl6">Miner Type
+      </label>
+      <!-- .section-block -->
+      <div class="section-block text-center text-sm-left">
+        <!-- .visual-picker -->
+        <div class="visual-picker visual-picker-sm has-peek px-3">
+          <!-- visual-picker input -->
+          <input type="radio" id="legacy" name="miner" value="legacy" ng-model="ctrl.wallets.miner_webdollar">
+          <!-- .visual-picker-figure -->
+          <label class="visual-picker-figure" for="legacy">
+            <!-- .visual-picker-content -->
+            <span class="visual-picker-content">
+              <span class="tile tile-sm bg-gray">
+                <i class="fa fa-microchip"></i>
+              </span>
+            </span>
+            <!-- /.visual-picker-content -->
+          </label>
+          <!-- /.visual-picker-figure -->
+          <!-- .visual-picker-peek -->
+          <span class="visual-picker-peek">Legacy</span>
+        </div>
+        <!-- /.visual-picker -->
+        <!-- .visual-picker -->
+        <div class="visual-picker visual-picker-sm has-peek px-3">
+          <!-- visual-picker input -->
+          <input type="radio" id="cpp" name="miner" value="cpp" ng-model="ctrl.wallets.miner_webdollar">
+          <!-- .visual-picker-figure -->
+          <label class="visual-picker-figure" for="cpp">
+            <!-- .visual-picker-content -->
+            <span class="visual-picker-content">
+              <span class="tile tile-sm bg-gray">
+                <i class="fa fa-bolt"></i>
+              </span>
+            </span>
+            <!-- /.visual-picker-content -->
+          </label>
+          <!-- /.visual-picker-figure -->
+          <!-- .visual-picker-peek -->
+          <span class="visual-picker-peek">CPP</span>
+        </div>
+        <!-- /.visual-picker -->
+      </div>
+    </div>
+    <!-- /.section-block -->
+  </fieldset>
+  <!-- /.fieldset -->
+</form>
+<!-- /.form -->
+
+<p>
+  <a href="https://webdollar.io" target="_blank">Tutorial to create a wallet for WebDollar</a>
+</p>

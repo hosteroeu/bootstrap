@@ -1,0 +1,63 @@
+<!-- .page -->
+<div class="page">
+  <!-- .page-title-bar -->
+  <header>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a ui-sref="miners">
+            <i class="breadcrumb-icon fa fa-angle-left mr-2"></i> Back to Devices
+          </a>
+        </li>
+      </ol>
+    </nav>
+  </header>
+  <!-- /.page-title-bar -->
+  <!-- .page-navs -->
+  <nav class="page-navs">
+    <!-- .nav-scroller -->
+    <div class="nav-scroller">
+      <!-- .nav -->
+      <div class="nav nav-tabs">
+        <a class="nav-link" ui-sref="host({host: host.id})" ng-class="{active: state.current.name == 'host'}">Details</a>
+        <a class="nav-link" ui-sref="host.charts({host: host.id})" ng-class="{active: state.current.name == 'host.charts'}">Charts</a>
+        <a class="nav-link" ui-sref="host.events({host: host.id})" ng-class="{active: state.current.name == 'host.events'}">Events</a>
+      </div>
+      <!-- /.nav -->
+    </div>
+    <!-- /.nav-scroller -->
+  </nav>
+  <!-- /.page-navs -->
+  <!-- .page-inner -->
+  <div class="page-inner">
+    <!-- .page-section -->
+    <div class="page-section">
+      <div class="card card-fluid">
+        <div class="card-body">
+          <div ui-view></div>
+
+          <div ng-if="!host">
+            <center>
+              <p><img src="images/loading.gif" /></p>
+            </center>
+          </div>
+
+          <div ng-if="host && state.current.name == 'host'">
+            <h4 class="card-title">{{host.name}}</h4>
+            <br />
+            <p>Status: <strong>{{ host.status | ucfirst }}</strong></p>
+            <!--<p>CPU Usage: <strong>{{ cpu_usage || 0 }}%</strong></p>-->
+            <p>Created: <strong>{{ host.internal_created | date }}</strong></p>
+            <p>Virtualization: <strong>{{ host.docker_version }}</strong></p>
+            <p>OS: <strong>{{ host.os }}</strong>, Kernel <strong>{{ host.os_kernel }}</strong></p>
+            <p>Memory: <strong>{{ (host.memory_total / 1000) | number:0 }} Gb RAM</strong></p>
+            <p>CPU: <strong>{{ host.cpu_count }}</strong> cores, <strong>{{ host.cpu_model }}</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.page-section -->
+  </div>
+  <!-- /.page-inner -->
+</div>
+<!-- /.page -->
