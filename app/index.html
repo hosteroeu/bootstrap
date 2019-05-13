@@ -7,15 +7,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!-- End Required meta tags -->
   <!-- Begin SEO tag -->
-  <title>Hostero Dashboard</title>
+  <title>Hostero Bootstrap</title>
   <meta name="author" content="Hostero">
   <meta name="description" content="Start mining cryptocurrency in a few minutes. Mining software for CPU mineable cryptocurrencies.">
-  <meta property="og:title" content="Hostero Dashboard">
+  <meta property="og:title" content="Hostero Bootstrap">
   <meta property="og:locale" content="en_US">
   <meta property="og:description" content="Start mining cryptocurrency in a few minutes. Mining software for CPU mineable cryptocurrencies.">
-  <meta property="og:url" content="https://dashboard.hostero.eu/">
-  <meta property="og:site_name" content="Hostero Dashboard">
-  <link rel="canonical" href="https://dashboard.hostero.eu/">
+  <meta property="og:url" content="https://bootstrap.hostero.eu/">
+  <meta property="og:site_name" content="Hostero Bootstrap">
+  <link rel="canonical" href="https://bootstrap.hostero.eu/">
   <!-- FAVICONS -->
   <link rel="shortcut icon" href="favicon.ico">
   <meta name="theme-color" content="#3063A0">
@@ -72,8 +72,7 @@
           <!-- /.top-bar-item -->
           <!-- .top-bar-item -->
           <div class="top-bar-item top-bar-item-full" ng-cloak>
-            Account:&nbsp;<span class="badge badge-lg badge-info"><a ui-sref="account">{{global_account.name}}</a></span> &nbsp;&nbsp;&nbsp;&nbsp;
-            <i class="fas fa-bolt"></i>&nbsp;Total Hashrate: {{total_power | hashrate}}
+            Account:&nbsp;<span class="badge badge-lg badge-info"><a ui-sref="account">{{global_account.name}}</a></span>
           </div>
           <!-- /.top-bar-item -->
           <!-- .top-bar-item -->
@@ -250,7 +249,7 @@
               </li>
               <!-- /.menu-item -->
               <!-- .menu-header -->
-              <li class="menu-header" ng-if="isAuthenticated">Management </li>
+              <li class="menu-header" ng-if="isAuthenticated">Settings </li>
               <!-- /.menu-header -->
               <!-- .menu-item -->
               <li class="menu-item" ng-if="isAuthenticated">
@@ -281,19 +280,7 @@
               </li>
               <!-- /.menu-item -->
               <!-- .menu-header -->
-              <li class="menu-header" ng-if="isAuthenticated">Staking </li>
-              <!-- /.menu-header -->
-              <!-- .menu-item -->
-              <li class="menu-item" ng-if="isAuthenticated">
-                <a ui-sref="nodes" class="menu-link">
-                  <span class="menu-icon fas fa-network-wired"></span>
-                  <span class="menu-text">Nodes</span>
-                  <span class="badge badge-success" ng-cloak>{{global_nodes.length}}</span>
-                </a>
-              </li>
-              <!-- /.menu-item -->
-              <!-- .menu-header -->
-              <li class="menu-header" ng-if="isAuthenticated">Mining </li>
+              <li class="menu-header" ng-if="isAuthenticated">Manage </li>
               <!-- /.menu-header -->
               <!-- .menu-item -->
               <li class="menu-item" ng-if="isAuthenticated">
@@ -308,7 +295,7 @@
               <li class="menu-item" ng-if="isAuthenticated">
                 <a ui-sref="miners" class="menu-link">
                   <span class="menu-icon fas fa-microchip"></span>
-                  <span class="menu-text">Miners</span>
+                  <span class="menu-text">Nodes</span>
                   <span class="badge badge-success" ng-cloak>{{global_miners.length}}</span>
                 </a>
               </li>
