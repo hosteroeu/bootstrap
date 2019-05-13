@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name atlasApp.controller:AccountCtrl
+ * @name menoetiusApp.controller:AccountCtrl
  * @description
  * # AccountCtrl
- * Controller of the atlasApp
+ * Controller of the menoetiusApp
  */
-angular.module('atlasApp')
+angular.module('menoetiusApp')
   .controller('AccountCtrl', function($scope, accountsService) {
     var account = JSON.parse(localStorage.getItem('account'));
 

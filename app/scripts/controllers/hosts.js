@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name atlasApp.controller:HostsCtrl
+ * @name menoetiusApp.controller:HostsCtrl
  * @description
  * # HostsCtrl
- * Controller of the atlasApp
+ * Controller of the menoetiusApp
  */
-angular.module('atlasApp')
+angular.module('menoetiusApp')
   .controller('HostsCtrl', function($scope, $state, hostsService, minersService, DTOptionsBuilder) {
     $scope.miners = minersService.query();
     $scope.hosts = null;

@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name atlasApp.controller:RootCtrl
+ * @name menoetiusApp.controller:RootCtrl
  * @description
  * # RootCtrl
- * Controller of the atlasApp
+ * Controller of the menoetiusApp
  */
-angular.module('atlasApp')
+angular.module('menoetiusApp')
   .controller('RootCtrl', function($scope, $rootScope, $state, hostsService, minersService, coinsService, accountsService, logsService) {
     var token = localStorage.getItem('token');
 

@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc factory
- * @name atlasApp.hosts
+ * @name menoetiusApp.hosts
  * @description
  * # hosts
- * Service in the atlasApp.
+ * Service in the menoetiusApp.
  */
-angular.module('atlasApp')
+angular.module('menoetiusApp')
   .factory('hostsService', function($resource, api) {
     return $resource(api.url + api.version +
       '/hosts/:id/:controller/:verb/:action', {

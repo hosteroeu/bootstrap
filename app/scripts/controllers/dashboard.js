@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name atlasApp.controller:DashboardCtrl
+ * @name menoetiusApp.controller:DashboardCtrl
  * @description
  * # DashboardCtrl
- * Controller of the atlasApp
+ * Controller of the menoetiusApp
  */
-angular.module('atlasApp')
+angular.module('menoetiusApp')
   .controller('DashboardCtrl', function($scope, accountsService, hostsService, minersService, logsService) {
     var account = JSON.parse(localStorage.getItem('account'));
 

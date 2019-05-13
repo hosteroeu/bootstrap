@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc factory
- * @name atlasApp.coins
+ * @name menoetiusApp.coins
  * @description
  * # coins
- * Service in the atlasApp.
+ * Service in the menoetiusApp.
  */
-angular.module('atlasApp')
+angular.module('menoetiusApp')
   .factory('coinsService', function($resource, api) {
     return $resource(api.url + api.version +
       '/coins/:id/:controller/:verb/:action', {

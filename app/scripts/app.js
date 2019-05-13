@@ -2,14 +2,14 @@
 
 /**
  * @ngdoc overview
- * @name atlasApp
+ * @name menoetiusApp
  * @description
- * # atlasApp
+ * # menoetiusApp
  *
  * Main module of the application.
  */
 angular
-  .module('atlasApp', [
+  .module('menoetiusApp', [
     'ngAnimate',
     'ngCookies',
     'ngMessages',

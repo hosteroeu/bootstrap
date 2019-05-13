@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name atlasApp.controller:NodesCtrl
+ * @name menoetiusApp.controller:NodesCtrl
  * @description
  * # NodesCtrl
- * Controller of the atlasApp
+ * Controller of the menoetiusApp
  */
-angular.module('atlasApp')
+angular.module('menoetiusApp')
   .controller('NodesCtrl', function($scope, $state, hostsService, DTOptionsBuilder) {
     $scope.nodes = null;
     $scope.filter = '';

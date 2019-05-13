@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc service
- * @name atlasApp.auth
+ * @name menoetiusApp.auth
  * @description
  * # auth
- * Service in the atlasApp.
+ * Service in the menoetiusApp.
  */
-angular.module('atlasApp')
+angular.module('menoetiusApp')
   .service('authService', function($rootScope, $state, $cookies, lock, authManager, accountsService) {
     var userProfile = JSON.parse(localStorage.getItem('profile')) || {};
 

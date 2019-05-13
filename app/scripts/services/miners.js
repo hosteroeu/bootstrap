@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc factory
- * @name atlasApp.miners
+ * @name menoetiusApp.miners
  * @description
  * # miners
- * Service in the atlasApp.
+ * Service in the menoetiusApp.
  */
-angular.module('atlasApp')
+angular.module('menoetiusApp')
   .factory('minersService', function($resource, api) {
     return $resource(api.url + api.version +
       '/miners/:id/:controller/:verb/:action', {

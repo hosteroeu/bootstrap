@@ -2,12 +2,12 @@
 
 /**
  * @ngdoc function
- * @name atlasApp.filter:password
+ * @name menoetiusApp.filter:password
  * @description
  * # Password
- * Filter of the atlasApp
+ * Filter of the menoetiusApp
  */
-angular.module('atlasApp')
+angular.module('menoetiusApp')
   .filter('password', function() {
     return function(input) {
       return Array(input.length + 1).join('*');
