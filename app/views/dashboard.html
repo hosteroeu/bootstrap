@@ -78,78 +78,6 @@
       <!-- /.card -->
 
       <div class="section-block">
-        <div class="metric-row">
-          <!-- metric column -->
-          <div class="col-12 col-sm-6 col-lg-3">
-            <!-- .metric -->
-            <div class="card-metric">
-              <div class="metric">
-                <p class="metric-value h3">
-                  <sub>
-                    <i class="fas fa-bolt"></i>
-                  </sub>
-                  <span class="value">{{ total_power | hashrate }}</span>
-                </p>
-                <h2 class="metric-label"> Total Hashrate </h2>
-              </div>
-            </div>
-            <!-- /.metric -->
-          </div>
-          <!-- /metric column -->
-          <!-- metric column -->
-          <div class="col-12 col-sm-6 col-lg-3">
-            <!-- .metric -->
-            <div class="card-metric">
-              <div class="metric">
-                <p class="metric-value h3">
-                  <sub>
-                  <i class="fas fa-microchip"></i>
-                </sub>
-                  <span class="value">{{ global_miners.length || 0 }}</span>
-                </p>
-                <h2 class="metric-label"> <a ui-sref="miners">Miners</a> </h2>
-              </div>
-            </div>
-            <!-- /.metric -->
-          </div>
-          <!-- /metric column -->
-          <!-- metric column -->
-          <div class="col-12 col-sm-6 col-lg-3">
-            <!-- .metric -->
-            <div class="card-metric">
-              <div class="metric">
-                <p class="metric-value h3">
-                  <sub>
-                  <i class="fas fa-laptop"></i>
-                </sub>
-                  <span class="value">{{ global_hosts.length || 0 }}</span>
-                </p>
-                <h2 class="metric-label"> <a ui-sref="hosts">Devices</a> </h2>
-              </div>
-            </div>
-            <!-- /.metric -->
-          </div>
-          <!-- /metric column -->
-          <!-- metric column -->
-          <div class="col-12 col-sm-6 col-lg-3">
-            <!-- .metric -->
-            <div class="card-metric">
-              <div class="metric">
-                <p class="metric-value h3">
-                  <sub>
-                  <i class="fas fa-coins"></i>
-                </sub>
-                  <span class="value">{{ global_coins.length }}</span>
-                </p>
-                <h2 class="metric-label"> <a ui-sref="wallets">Coins</a> </h2>
-              </div>
-            </div>
-            <!-- /.metric -->
-          </div>
-          <!-- /metric column -->
-        </div>
-        <!-- /metric row -->
-
         <!-- metric row -->
         <div class="metric-row">
           <!-- metric column -->
@@ -189,45 +117,25 @@
           <div class="col-6">
             <!-- .card -->
             <section class="card card-fluid">
-              <iframe ng-src="{{ getIframeSrcAlt(5, 'now-1h') }}" width="100%" height="300" frameborder="0"></iframe>
+              <!-- .metric -->
+              <div class="card-metric">
+                <div class="metric">
+                  <p class="metric-value h3">
+                    <sub>
+                    <i class="fas fa-microchip"></i>
+                  </sub>
+                    <span class="value">{{ global_miners.length || 0 }}</span>
+                  </p>
+                  <h2 class="metric-label"> <a ui-sref="miners">Miners</a> </h2>
+                </div>
+              </div>
+              <!-- /.metric -->
             </section>
             <!-- /.card -->
           </div>
           <!-- /metric column -->
         </div>
         <!-- /metric row -->
-
-        <!-- metric row -->
-        <div class="metric-row">
-          <!-- metric column -->
-          <div class="col-12">
-            <!-- .card -->
-            <section class="card card-fluid">
-              <iframe ng-src="{{ getIframeSrcAlt(3) }}" width="100%" height="300" frameborder="0"></iframe>
-            </section>
-            <!-- /.card -->
-          </div>
-          <!-- /metric column -->
-        </div>
-        <!-- /metric row -->
-
-        <!-- metric row -->
-        <div class="metric-row" ng-if="show_wmp_chart">
-          <!-- metric column -->
-          <div class="col-12">
-            <!-- .card -->
-            <section class="card card-fluid">
-              <iframe ng-src="{{ getIframeSrcAlt2(1, wallet_webdollar) }}" width="100%" height="300" frameborder="0"></iframe>
-            </section>
-            <!-- /.card -->
-          </div>
-          <!-- /metric column -->
-        </div>
-        <!-- /metric row -->
-
-        <!--
-        <p ng-if="!show_wmp_chart"><strong>Note:</strong> More charts are exclusively available for WebDollar miners running on the <a href="https://www.webdollarminingpool.com" target="_blank">WMP</a> pool.</p>
-        -->
       </div>
     </div>
     <!-- /.page-section -->
