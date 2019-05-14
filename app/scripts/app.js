@@ -50,7 +50,7 @@ angular
       tokenGetter: function() {
         return localStorage.getItem('token');
       },
-      whiteListedDomains: ['localhost', 'api.hostero.eu', 'dashboard.hostero.eu'],
+      whiteListedDomains: ['localhost', 'api.hostero.eu', 'dashboard.hostero.eu', 'bootstrap.hostero.eu'],
       unauthenticatedRedirectPath: '/login'
     });
 
