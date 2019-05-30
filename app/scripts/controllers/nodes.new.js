@@ -27,7 +27,7 @@ angular.module('menoetiusApp')
 
     _this.selected_host = null;
     _this.selected_host_id = null;
-    _this.threads = 0;
+    _this.threads = 1;
 
     hostsService.query().$promise.then(function(hosts) {
       _this.hosts = hosts;
@@ -75,21 +75,21 @@ angular.module('menoetiusApp')
         status: 'stopped',
         deployed: '2',
         threads: _this.threads,
-        processor: _this.wallets.default_processor,
+        processor: null,
         host_id: _this.selected_host.id
       };
 
       switch (_this.wallets.auto_deploy_coin) {
         case 'webdollar':
-          if (!_this.wallets.mining_pool_url_webdollar || !_this.wallets.wallet_webdollar) {
+          if (!_this.wallets.wallet_webdollar) {
             window.toastr.warning('Please enter WebDollar information');
             return;
           }
 
-          new_miner.mining_pool_url = _this.wallets.mining_pool_url_webdollar;
+          new_miner.mining_pool_url = null;
           new_miner.wallet = _this.wallets.wallet_webdollar;
           new_miner.password = _this.wallets.public_key_webdollar + '|' + _this.wallets.private_key_webdollar;
-          new_miner.type = _this.wallets.miner_webdollar;
+          new_miner.type = null;
           break;
       }
 
