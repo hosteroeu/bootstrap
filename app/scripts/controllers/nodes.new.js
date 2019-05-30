@@ -38,6 +38,12 @@ angular.module('menoetiusApp')
       }
     });
 
+    _this.update_threads = function() {
+      _this.selected_host = getHostById(_this.hosts, _this.selected_host_id);
+
+      _this.threads = _this.selected_host ? parseInt(_this.selected_host.cpu_count) : 0;
+    };
+
     accountsService.get({
       id: account.id
     }).$promise.then(function(account) {
