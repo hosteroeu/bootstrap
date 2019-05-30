@@ -5,15 +5,15 @@
     <!-- .page-title-bar -->
     <header class="page-title-bar">
       <!-- floating action -->
-      <button type="button" class="btn btn-success btn-floated" ui-sref="new_miner" ng-if="global_miners.length < (global_account.plan_miners + global_account.bonus_miners)">
+      <button type="button" class="btn btn-success btn-floated" ui-sref="new_node" ng-if="global_nodes.length < (global_account.plan_nodes + global_account.bonus_nodes)">
         <span class="fa fa-plus"></span>
       </button>
       <!-- /floating action -->
       <!-- title and toolbar -->
       <div class="d-md-flex align-items-md-start">
-        <h1 class="page-title mr-sm-auto"> {{miners.length || 0}} Nodes
+        <h1 class="page-title mr-sm-auto"> {{nodes.length || 0}} Nodes
           <small class="badge">
-            <a ui-sref="account">{{(global_account.plan_miners + global_account.bonus_miners) || 0}} Available</a>
+            <a ui-sref="account">{{(global_account.plan_nodes + global_account.bonus_nodes) || 0}} Available</a>
           </small>
         </h1>
         <!-- .btn-toolbar -->
@@ -25,7 +25,7 @@
             </button>
             <div class="dropdown-arrow dropdown-arrow-right"></div>
             <div class="dropdown-menu dropdown-menu-right">
-              <a href="" class="dropdown-item" ng-click="minersCtrl.delete_all()">Delete All Miners</a>
+              <a href="" class="dropdown-item" ng-click="nodesCtrl.delete_all()">Delete All Nodes</a>
             </div>
           </div>
         </div>
@@ -37,18 +37,18 @@
 
     <!-- .page-section -->
     <section class="card card-fluid">
-      <div class="card-body" ng-if="miners != null && !miners.length">
+      <div class="card-body" ng-if="nodes != null && !nodes.length">
         You have not deployed any nodes. <a ui-sref="new_node">Deploy a node</a>.
       </div>
 
-      <div ng-if="miners == null">
+      <div ng-if="nodes == null">
         <center>
           <br />
           <p><img src="images/loading.gif" /></p>
         </center>
       </div>
 
-      <div class="table-responsive" ng-if="miners != null && miners.length">
+      <div class="table-responsive" ng-if="nodes != null && nodes.length">
         <table class="table table-hover" datatable="ng" dt-options="dt_options">
           <thead class="thead-light">
             <tr>
@@ -62,71 +62,71 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="miner in miners" ng-class="{highlight: miner.temporary}">
+            <tr ng-repeat="node in nodes" ng-class="{highlight: node.temporary}">
               <td>
-                <div class="tile bg-{{minersCtrl.get_status_color(miner)}}">
-                  <i class="fa fa-{{minersCtrl.get_status_icon(miner)}}"></i>
+                <div class="tile bg-{{nodesCtrl.get_status_color(node)}}">
+                  <i class="fa fa-{{nodesCtrl.get_status_icon(node)}}"></i>
                 </div>
                 &nbsp;
-                <a ui-sref="miner({miner:miner.id})">{{ miner.name }}</a>
+                <a ui-sref="node({node:node.id})">{{ node.name }}</a>
               </td>
               <td>
-                <a ui-sref="wallets.wallet({wallet: miner.coin})">{{ miner.coin | ucfirst }}</a>
+                <a ui-sref="wallets.wallet({wallet: node.coin})">{{ node.coin | ucfirst }}</a>
               </td>
               <td>
-                <span ng-if="!miner.temporary">
-                  {{ miner.power | hashrate }}
+                <span ng-if="!node.temporary">
+                  {{ node.power | hashrate }}
                   <span class="badge badge-secondary" data-toggle="tooltip" data-placement="top" title="Updated every 30 minutes">
                     <i class="fa fa-info"></i>
                   </span>
                 </span>
-                <span ng-if="miner.temporary">
+                <span ng-if="node.temporary">
                   -
-                  <span class="badge badge-secondary" data-toggle="tooltip" data-placement="top" title="Not computed for temporary miners">
+                  <span class="badge badge-secondary" data-toggle="tooltip" data-placement="top" title="Not computed for temporary nodes">
                     <i class="fa fa-info"></i>
                   </span>
                 </span>
               </td>
               <!--
               <td>
-                <span ng-if="!miner.temporary">{{ miner.reward_24h_eur }} &euro;</span>
-                <span ng-if="miner.temporary">-</span>
+                <span ng-if="!node.temporary">{{ node.reward_24h_eur }} &euro;</span>
+                <span ng-if="node.temporary">-</span>
               </td>
               -->
               <td>
-                {{ miner.updated_at | timeAgo }}
+                {{ node.updated_at | timeAgo }}
               </td>
               <td class="d-none d-sm-none d-md-none d-lg-block">
-                <a href="" ui-sref="host({host:miner.Host.id})" title="{{miner.Host.name}}" ng-if="miner.Host">
-                  {{ miner.Host.name | limitTo:20 }}
+                <a href="" ui-sref="host({host:node.Host.id})" title="{{node.Host.name}}" ng-if="node.Host">
+                  {{ node.Host.name | limitTo:20 }}
                 </a>
-                <span ng-if="!miner.Host">-</span>
+                <span ng-if="!node.Host">-</span>
               </td>
-              <td class="align-middle text-right" ng-if="!miner.temporary">
+              <td class="align-middle text-right" ng-if="!node.temporary">
                 <!--
-                <a href="http://dashboard.hostero.eu/#!/logs/{{miner.id}}" target="_blank" class="btn btn-sm btn-info" data-toggle="tooltip" data-placement="top" title="Logs">
+                <a href="http://dashboard.hostero.eu/#!/logs/{{node.id}}" target="_blank" class="btn btn-sm btn-info" data-toggle="tooltip" data-placement="top" title="Logs">
                   <i class="fa fa-database"></i>
                   <span class="sr-only">Logs</span>
                 </a>
                 -->
                 <!--
-                <a ng-click="minersCtrl.fast_deploy(miner)" class="btn btn-sm btn-secondary" data-toggle="tooltip" data-placement="top" title="Fast deploy">
+                <a ng-click="nodesCtrl.fast_deploy(node)" class="btn btn-sm btn-secondary" data-toggle="tooltip" data-placement="top" title="Fast deploy">
                   <i class="fa fa-bolt"></i>
                   <span class="sr-only">Fast deploy</span>
                 </a>
                 -->
                 <!--
-                <a ng-click="minersCtrl.redeploy(miner)" class="btn btn-sm btn-secondary" data-toggle="tooltip" data-placement="top" title="Re-deploy">
+                <a ng-click="nodesCtrl.redeploy(node)" class="btn btn-sm btn-secondary" data-toggle="tooltip" data-placement="top" title="Re-deploy">
                   <i class="fa fa-recycle"></i>
                   <span class="sr-only">Re-deploy</span>
                 </a>
                 -->
-                <a ng-click="minersCtrl.remove(miner)" class="btn btn-sm btn-secondary" data-toggle="tooltip" data-placement="top" title="Remove">
+                <a ng-click="nodesCtrl.remove(node)" class="btn btn-sm btn-secondary" data-toggle="tooltip" data-placement="top" title="Remove">
                   <i class="far fa-trash-alt"></i>
                   <span class="sr-only">Remove</span>
                 </a>
               </td>
-              <td class="align-middle text-right" ng-if="miner.temporary">
+              <td class="align-middle text-right" ng-if="node.temporary">
                 -
               </td>
             </tr>

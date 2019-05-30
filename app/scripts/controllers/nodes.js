@@ -9,7 +9,7 @@
  */
 angular.module('menoetiusApp')
   .controller('NodesCtrl', function($scope, $state, minersService, coinsService, hostsService, DTOptionsBuilder) {
-    $scope.miners = null;
+    $scope.nodes = null;
     $scope.hosts = hostsService.query();
     $scope.filter = '';
     $scope.dt_options = DTOptionsBuilder.newOptions()
@@ -23,7 +23,7 @@ angular.module('menoetiusApp')
     });
 
     var getMiners = function() {
-      $scope.miners = minersService.query({
+      $scope.nodes = minersService.query({
         mode: 'node'
       });
     };
@@ -32,20 +32,20 @@ angular.module('menoetiusApp')
 
     getMiners();
 
-    this.get_status_color = function(miner) {
+    this.get_status_color = function(node) {
       var color = 'success';
 
-      if (miner.temporary) {
+      if (node.temporary) {
         color = '';
       }
 
       return color;
     };
 
-    this.get_status_icon = function(miner) {
+    this.get_status_icon = function(node) {
       var icon;
 
-      switch (miner.status) {
+      switch (node.status) {
         case 'started':
           icon = 'plug';
           break;
@@ -58,7 +58,7 @@ angular.module('menoetiusApp')
       return icon;
     };
 
-    this.redeploy = function(miner) {
+    this.redeploy = function(node) {
       /*
       var confirm = $mdDialog.confirm()
         .title('Do you want to re-deploy the miner?')
@@ -70,11 +70,11 @@ angular.module('menoetiusApp')
       */
 
       minersService.remove({
-        id: miner.id
+        id: node.id
       });
 
       hostsService.remove({
-        id: miner.host_id
+        id: node.host_id
       });
 
       window.toastr.info('Re-deploying started... It will take several minutes');
@@ -88,7 +88,7 @@ angular.module('menoetiusApp')
       }, 2000);
     };
 
-    this.remove = function(miner) {
+    this.remove = function(node) {
       /*
       var confirm = $mdDialog.confirm()
         .title('Do you want to remove the miner?')
@@ -100,7 +100,7 @@ angular.module('menoetiusApp')
       */
 
       minersService.remove({
-        id: miner.id
+        id: node.id
       }).$promise.then(function() {
         if ($state.current.name === 'nodes') {
           $state.reload();
@@ -108,12 +108,12 @@ angular.module('menoetiusApp')
           $state.go('nodes');
         }
 
-        if (miner.Host && miner.Host.user_id === 'shared') {
+        if (node.Host && node.Host.user_id === 'shared') {
           return;
         }
 
         hostsService.update({
-            id: miner.host_id
+            id: node.host_id
           }, {
             deployed: '0'
           }).$promise
