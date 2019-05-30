@@ -80,10 +80,10 @@ angular.module('menoetiusApp')
       window.toastr.info('Re-deploying started... It will take several minutes');
 
       setTimeout(function() {
-        if ($state.current.name === 'miners') {
+        if ($state.current.name === 'nodes') {
           $state.reload();
         } else {
-          $state.go('miners');
+          $state.go('nodes');
         }
       }, 2000);
     };
@@ -102,10 +102,10 @@ angular.module('menoetiusApp')
       minersService.remove({
         id: miner.id
       }).$promise.then(function() {
-        if ($state.current.name === 'miners') {
+        if ($state.current.name === 'nodes') {
           $state.reload();
         } else {
-          $state.go('miners');
+          $state.go('nodes');
         }
 
         if (miner.Host && miner.Host.user_id === 'shared') {
