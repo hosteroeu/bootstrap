@@ -5,8 +5,8 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a ui-sref="miners">
-            <i class="breadcrumb-icon fa fa-angle-left mr-2"></i> Back to Miners
+          <a ui-sref="nodes">
+            <i class="breadcrumb-icon fa fa-angle-left mr-2"></i> Back to Nodes
           </a>
         </li>
       </ol>
@@ -19,10 +19,10 @@
     <div class="nav-scroller">
       <!-- .nav -->
       <div class="nav nav-tabs">
-        <a class="nav-link" ui-sref="miner({miner: miner.id})" ng-class="{active: state.current.name == 'miner'}">Details</a>
-        <a class="nav-link" ui-sref="miner.charts({miner: miner.id})" ng-class="{active: state.current.name == 'miner.charts'}">Charts</a>
-        <a class="nav-link" ui-sref="miner.logs({miner: miner.id})" ng-class="{active: state.current.name == 'miner.logs'}">Logs</a>
-        <a class="nav-link" ui-sref="miner.events({miner: miner.id})" ng-class="{active: state.current.name == 'miner.events'}">Events</a>
+        <a class="nav-link" ui-sref="node({node: miner.id})" ng-class="{active: state.current.name == 'node'}">Details</a>
+        <a class="nav-link" ui-sref="node.charts({node: miner.id})" ng-class="{active: state.current.name == 'node.charts'}">Charts</a>
+        <a class="nav-link" ui-sref="node.logs({node: miner.id})" ng-class="{active: state.current.name == 'node.logs'}">Logs</a>
+        <a class="nav-link" ui-sref="node.events({node: miner.id})" ng-class="{active: state.current.name == 'node.events'}">Events</a>
       </div>
       <!-- /.nav -->
     </div>
@@ -43,7 +43,7 @@
             </center>
           </div>
 
-          <div ng-if="miner && state.current.name == 'miner'">
+          <div ng-if="miner && state.current.name == 'node'">
             <h4 class="card-title">{{miner.name}}</h4>
             <br />
             <p>Status: <strong>{{ miner.status | ucfirst }}</strong></p>

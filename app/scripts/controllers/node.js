@@ -24,7 +24,7 @@ angular.module('menoetiusApp')
     }
 
     minersService.get({
-      id: $state.params.miner
+      id: $state.params.node
     }).$promise.then(function(res) {
       $scope.miner = res;
     });
@@ -39,7 +39,7 @@ angular.module('menoetiusApp')
     }, 60 * 1000);
 
     minersService.query({
-      id: $state.params.miner,
+      id: $state.params.node,
       controller: 'events'
     }).$promise.then(function(data) {
       $scope.events = data;

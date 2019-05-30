@@ -91,16 +91,6 @@ angular
           requiresLogin: true
         }
       })
-      .state('settings.auto_deploy', {
-        url: '/auto_deploy',
-        parent: 'settings',
-        templateUrl: 'views/settings.auto_deploy.html'
-      })
-      .state('settings.dual_mining', {
-        url: '/dual_mining',
-        parent: 'settings',
-        templateUrl: 'views/settings.dual_mining.html'
-      })
       .state('nodes', {
         url: '/nodes',
         templateUrl: 'views/nodes.html',
@@ -138,9 +128,9 @@ angular
         parent: 'node',
         templateUrl: 'views/node.logs.html'
       })
-      .state('miner.events', {
+      .state('node.events', {
         url: '/events',
-        parent: 'miner',
+        parent: 'node',
         templateUrl: 'views/events.html'
       })
       .state('logs', {
