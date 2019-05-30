@@ -73,7 +73,7 @@ angular.module('menoetiusApp')
         return;
       }
 
-      var name = 'miner-' + _this.selected_host.id;
+      var name = 'node-' + _this.selected_host.id;
       var new_miner = {
         mode: 'node',
         name: name,
