@@ -240,6 +240,16 @@
                 <!-- /child menu -->
               </li>
               <!-- /.menu-item -->
+              <!-- .menu-item -->
+              <li class="menu-item" ng-show="isAuthenticated">
+                <a ui-sref="wallets" class="menu-link">
+                  <span class="menu-icon fas fa-coins"></span>
+                  <span class="menu-text">Coins</span>
+                  <span class="badge badge-warning" ng-cloak>{{global_coins.length}}</span>
+                </a>
+                <!-- /child menu -->
+              </li>
+              <!-- /.menu-item -->
               <!-- .menu-header -->
               <li class="menu-header" ng-if="isAuthenticated">Management </li>
               <!-- /.menu-header -->
