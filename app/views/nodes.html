@@ -4,9 +4,32 @@
   <div class="page-inner">
     <!-- .page-title-bar -->
     <header class="page-title-bar">
+      <!-- floating action -->
+      <button type="button" class="btn btn-success btn-floated" ui-sref="new_miner" ng-if="global_miners.length < (global_account.plan_miners + global_account.bonus_miners)">
+        <span class="fa fa-plus"></span>
+      </button>
+      <!-- /floating action -->
       <!-- title and toolbar -->
       <div class="d-md-flex align-items-md-start">
-        <h1 class="page-title mr-sm-auto"> {{nodes.length || 0}} Nodes </h1>
+        <h1 class="page-title mr-sm-auto"> {{miners.length || 0}} Nodes
+          <small class="badge">
+            <a ui-sref="account">{{(global_account.plan_miners + global_account.bonus_miners) || 0}} Available</a>
+          </small>
+        </h1>
+        <!-- .btn-toolbar -->
+        <div class="btn-toolbar">
+          <div class="dropdown">
+            <button type="button" class="btn btn-light" data-toggle="dropdown">
+              <span>Batch</span>
+              <span class="caret"></span>
+            </button>
+            <div class="dropdown-arrow dropdown-arrow-right"></div>
+            <div class="dropdown-menu dropdown-menu-right">
+              <a href="" class="dropdown-item" ng-click="minersCtrl.delete_all()">Delete All Miners</a>
+            </div>
+          </div>
+        </div>
+        <!-- /.btn-toolbar -->
       </div>
       <!-- /title and toolbar -->
     </header>
@@ -14,64 +37,120 @@
 
     <!-- .page-section -->
     <section class="card card-fluid">
-      <div class="card-body" ng-if="nodes != null && !nodes.length">
-        No nodes.
+      <div class="card-body" ng-if="miners != null && !miners.length">
+        You have not deployed any nodes. <a ui-sref="new_node">Deploy a node</a>.
       </div>
 
-      <div ng-if="nodes == null">
+      <div ng-if="miners == null">
         <center>
           <br />
           <p><img src="images/loading.gif" /></p>
         </center>
       </div>
 
-      <div class="table-responsive" ng-if="nodes != null && nodes.length">
+      <div class="table-responsive" ng-if="miners != null && miners.length">
         <table class="table table-hover" datatable="ng" dt-options="dt_options">
           <thead class="thead-light">
             <tr>
-              <th>Node</th>
+              <th>Miner</th>
               <th>Coin</th>
-              <th>Type</th>
+              <th>Hashrate</th>
+              <!--<th>Est. 24h Rewards</th>-->
               <th>Updated</th>
+              <th class="d-none d-sm-none d-md-none d-lg-block">Device</th>
               <th>&nbsp;</th>
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="host in nodes">
+            <tr ng-repeat="miner in miners" ng-class="{highlight: miner.temporary}">
               <td>
-                <div class="tile bg-success">
-                  <i class="fa fa-network-wired"></i>
+                <div class="tile bg-{{minersCtrl.get_status_color(miner)}}">
+                  <i class="fa fa-{{minersCtrl.get_status_icon(miner)}}"></i>
                 </div>
-                &nbsp; {{ host.name | limitTo:100 }}
+                &nbsp;
+                <a ui-sref="miner({miner:miner.id})">{{ miner.name }}</a>
               </td>
               <td>
-                <a ui-sref="wallets.wallet({wallet: 'webdollar'})">WebDollar</a>
+                <a ui-sref="wallets.wallet({wallet: miner.coin})">{{ miner.coin | ucfirst }}</a>
               </td>
               <td>
-                Proof Of Stake
+                <span ng-if="!miner.temporary">
+                  {{ miner.power | hashrate }}
+                  <span class="badge badge-secondary" data-toggle="tooltip" data-placement="top" title="Updated every 30 minutes">
+                    <i class="fa fa-info"></i>
+                  </span>
+                </span>
+                <span ng-if="miner.temporary">
+                  -
+                  <span class="badge badge-secondary" data-toggle="tooltip" data-placement="top" title="Not computed for temporary miners">
+                    <i class="fa fa-info"></i>
+                  </span>
+                </span>
               </td>
+              <!--
               <td>
-                {{ host.updated_at | timeAgo }}
+                <span ng-if="!miner.temporary">{{ miner.reward_24h_eur }} &euro;</span>
+                <span ng-if="miner.temporary">-</span>
               </td>
-              <td class="align-middle text-right">
-                <a ui-sref="new_miner_pos({host:host.id})" ng-if="global_miners.length < (global_account.plan_miners + global_account.bonus_miners)" class="btn btn-sm btn-warning" data-toggle="tooltip" data-placement="top" title="Deploy WebDollar POS">
-                  <i class="fas fa-plus"></i>
-                  <span class="sr-only">Deploy WebDollar POS</span>
+              -->
+              <td>
+                {{ miner.updated_at | timeAgo }}
+              </td>
+              <td class="d-none d-sm-none d-md-none d-lg-block">
+                <a href="" ui-sref="host({host:miner.Host.id})" title="{{miner.Host.name}}" ng-if="miner.Host">
+                  {{ miner.Host.name | limitTo:20 }}
                 </a>
+                <span ng-if="!miner.Host">-</span>
+              </td>
+              <td class="align-middle text-right" ng-if="!miner.temporary">
+                <!--
+                <a href="http://dashboard.hostero.eu/#!/logs/{{miner.id}}" target="_blank" class="btn btn-sm btn-info" data-toggle="tooltip" data-placement="top" title="Logs">
+                  <i class="fa fa-database"></i>
+                  <span class="sr-only">Logs</span>
+                </a>
+                -->
+                <!--
+                <a ng-click="minersCtrl.fast_deploy(miner)" class="btn btn-sm btn-secondary" data-toggle="tooltip" data-placement="top" title="Fast deploy">
+                  <i class="fa fa-bolt"></i>
+                  <span class="sr-only">Fast deploy</span>
+                </a>
+                -->
+                <!--
+                <a ng-click="minersCtrl.redeploy(miner)" class="btn btn-sm btn-secondary" data-toggle="tooltip" data-placement="top" title="Re-deploy">
+                  <i class="fa fa-recycle"></i>
+                  <span class="sr-only">Re-deploy</span>
+                </a>
+                -->
+                <a ng-click="minersCtrl.remove(miner)" class="btn btn-sm btn-secondary" data-toggle="tooltip" data-placement="top" title="Remove">
+                  <i class="far fa-trash-alt"></i>
+                  <span class="sr-only">Remove</span>
+                </a>
+              </td>
+              <td class="align-middle text-right" ng-if="miner.temporary">
+                -
               </td>
             </tr>
           </tbody>
         </table>
       </div>
     </section>
-
-    <div class="alert alert-secondary has-icon" role="alert">
-      <div class="alert-icon">
-        <span class="fa fa-info"></span>
-      </div>
-      <strong>Need help?</strong><br /> Check out our <a href="https://www.hostero.eu/docs/webdollar-pos-mining" class="alert-link" target="_blank">guide</a> for configuring the Proof-of-Stake miner for WebDollar.
-    </div>
   </div>
   <!-- /.page-inner -->
 </div>
 <!-- /.page -->
+
+<!--Start of Tawk.to Script-->
+<script type="text/javascript">
+  var Tawk_API = Tawk_API || {},
+    Tawk_LoadStart = new Date();
+  (function() {
+    var s1 = document.createElement("script"),
+      s0 = document.getElementsByTagName("script")[0];
+    s1.async = true;
+    s1.src = 'https://embed.tawk.to/5be95f010e6b3311cb78df6b/default';
+    s1.charset = 'UTF-8';
+    s1.setAttribute('crossorigin', '*');
+    s0.parentNode.insertBefore(s1, s0);
+  })();
+</script>
+<!--End of Tawk.to Script-->

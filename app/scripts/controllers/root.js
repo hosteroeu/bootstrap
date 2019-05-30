@@ -20,36 +20,33 @@ angular.module('menoetiusApp')
 
     if (token) {
       $scope.isAuthenticated = true;
-      $scope.total_power = 0;
       $scope.profile = JSON.parse(localStorage.getItem('profile')) || {};
       $rootScope.global_account = JSON.parse(localStorage.getItem('account')) || {};
 
       if ($rootScope.minimalLayout === false) {
         hostsService.query().$promise.then(function(res) {
           $scope.global_hosts = [];
-          $scope.global_nodes = [];
 
           res.forEach(function(host) {
-            if (host.user_id === 'shared') {
-              $scope.global_nodes.push(host);
-            } else {
-              $scope.global_hosts.push(host);
-            }
+            $scope.global_hosts.push(host);
           });
         });
 
         $scope.global_coins = coinsService.query({
-          on_hostero: 1
+          on_hostero: 1,
+          on_bootstrap: 1
         });
 
         $scope.global_events = logsService.query();
 
-        minersService.query().$promise.then(function(res) {
-          $scope.global_miners = [];
+        minersService.query({
+          mode: 'node'
+        }).$promise.then(function(res) {
+          $scope.global_nodes = [];
 
           res.forEach(function(miner) {
             if (!miner.temporary) {
-              $scope.global_miners.push(miner);
+              $scope.global_nodes.push(miner);
               $scope.total_power += parseInt(miner.power) || 0;
             }
           });

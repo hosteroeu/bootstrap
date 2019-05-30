@@ -4,7 +4,7 @@
   <div class="page-inner">
     <!-- .page-title-bar -->
     <header class="page-title-bar">
-      <h1 class="page-title">Deploy Miner</h1>
+      <h1 class="page-title">Deploy Node</h1>
     </header>
     <!-- /.page-title-bar -->
     <!-- .page-section -->
@@ -12,7 +12,7 @@
       <div class="card card-fluid">
         <div class="card-body">
           <div class="row">
-            <div class="col-sm-8">
+            <div class="col-sm-12">
               <div class="form-group">
                 <label for="host">Device</label>
                 <select class="custom-select" id="host" required="required" ng-model="ctrl.selected_host_id" ng-change="ctrl.update_threads()">
@@ -21,57 +21,7 @@
                 </select>
               </div>
             </div>
-            <div class="col-sm-4">
-              <div class="form-group">
-                <label for="threads">Threads</label>
-                <input type="number" class="form-control" id="threads" ng-model="ctrl.threads" required="" placeholder="Pick a host" />
-              </div>
-            </div>
           </div>
-
-          <p>Processor Flag (<a href="" ng-click="ctrl.show_processor_flag = !ctrl.show_processor_flag">overwrite default settings</a>)</p>
-          <!-- .section-block -->
-          <div class="section-block text-center text-sm-left" ng-show="ctrl.show_processor_flag">
-            <!-- .visual-picker -->
-            <div class="visual-picker visual-picker-sm has-peek px-3">
-              <!-- visual-picker input -->
-              <input type="radio" id="avx2" name="processor" value="avx2" ng-model="ctrl.wallets.default_processor" />
-              <!-- .visual-picker-figure -->
-              <label class="visual-picker-figure" for="avx2">
-                <!-- .visual-picker-content -->
-                <span class="visual-picker-content">
-                  <span class="tile tile-sm bg-gray">
-                    <i class="fa fa-microchip"></i>
-                  </span>
-                </span>
-                <!-- /.visual-picker-content -->
-              </label>
-              <!-- /.visual-picker-figure -->
-              <!-- .visual-picker-peek -->
-              <span class="visual-picker-peek">AVX2 (new)</span>
-            </div>
-            <!-- /.visual-picker -->
-            <!-- .visual-picker -->
-            <div class="visual-picker visual-picker-sm has-peek px-3">
-              <!-- visual-picker input -->
-              <input type="radio" id="sse2" name="processor" value="sse2" ng-model="ctrl.wallets.default_processor" />
-              <!-- .visual-picker-figure -->
-              <label class="visual-picker-figure" for="sse2">
-                <!-- .visual-picker-content -->
-                <span class="visual-picker-content">
-                  <span class="tile tile-sm bg-gray">
-                    <i class="fa fa-microchip"></i>
-                  </span>
-                </span>
-                <!-- /.visual-picker-content -->
-              </label>
-              <!-- /.visual-picker-figure -->
-              <!-- .visual-picker-peek -->
-              <span class="visual-picker-peek">SSE2 (old)</span>
-            </div>
-            <!-- /.visual-picker -->
-          </div>
-          <!-- /.section-block -->
 
           <p>Coin</p>
           <!-- .section-block -->
@@ -105,7 +55,7 @@
           <hr class="my-5" />
           <div class="row">
             <div class="col-sm">
-              <button class="btn btn-outline-secondary btn-lg btn-block" ui-sref="miners">Cancel</button>
+              <button class="btn btn-outline-secondary btn-lg btn-block" ui-sref="nodes">Cancel</button>
             </div>
             <div class="col-sm">
               <button class="btn btn-primary btn-lg btn-block" ng-click="ctrl.deploy()">Deploy</button>

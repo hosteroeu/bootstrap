@@ -101,51 +101,42 @@ angular
         parent: 'settings',
         templateUrl: 'views/settings.dual_mining.html'
       })
-      .state('miners', {
-        url: '/miners',
-        templateUrl: 'views/miners.html',
-        controller: 'MinersCtrl',
-        controllerAs: 'minersCtrl',
+      .state('nodes', {
+        url: '/nodes',
+        templateUrl: 'views/nodes.html',
+        controller: 'NodesCtrl',
+        controllerAs: 'nodesCtrl',
         data: {
           requiresLogin: true
         }
       })
-      .state('new_miner', {
-        url: '/new_miner/:host',
-        templateUrl: 'views/miners.new.html',
-        controller: 'MinersNewCtrl',
+      .state('new_node', {
+        url: '/new_node/:host',
+        templateUrl: 'views/nodes.new.html',
+        controller: 'NodesNewCtrl',
         controllerAs: 'ctrl',
         data: {
           requiresLogin: true
         }
       })
-      .state('new_miner_pos', {
-        url: '/new_miner_pos/:host',
-        templateUrl: 'views/miners.new_pos.html',
-        controller: 'MinersNewPOSCtrl',
-        controllerAs: 'ctrl',
+      .state('node', {
+        url: '/nodes/:node',
+        templateUrl: 'views/node.html',
+        controller: 'NodeCtrl',
+        controllerAs: 'nodeCtrl',
         data: {
           requiresLogin: true
         }
       })
-      .state('miner', {
-        url: '/miners/:miner',
-        templateUrl: 'views/miner.html',
-        controller: 'MinerCtrl',
-        controllerAs: 'minerCtrl',
-        data: {
-          requiresLogin: true
-        }
-      })
-      .state('miner.charts', {
+      .state('node.charts', {
         url: '/charts',
-        parent: 'miner',
-        templateUrl: 'views/miner.charts.html'
+        parent: 'node',
+        templateUrl: 'views/node.charts.html'
       })
-      .state('miner.logs', {
+      .state('node.logs', {
         url: '/logs',
-        parent: 'miner',
-        templateUrl: 'views/miner.logs.html'
+        parent: 'node',
+        templateUrl: 'views/node.logs.html'
       })
       .state('miner.events', {
         url: '/events',
@@ -168,15 +159,6 @@ angular
         controllerAs: 'installCtrl',
         data: {
           requiresLogin: false
-        }
-      })
-      .state('nodes', {
-        url: '/nodes',
-        templateUrl: 'views/nodes.html',
-        controller: 'NodesCtrl',
-        controllerAs: 'nodesCtrl',
-        data: {
-          requiresLogin: true
         }
       })
       .state('hosts', {

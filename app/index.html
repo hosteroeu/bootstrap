@@ -254,10 +254,10 @@
               <!-- /.menu-item -->
               <!-- .menu-item -->
               <li class="menu-item" ng-if="isAuthenticated">
-                <a ui-sref="miners" class="menu-link">
+                <a ui-sref="nodes" class="menu-link">
                   <span class="menu-icon fas fa-microchip"></span>
                   <span class="menu-text">Nodes</span>
-                  <span class="badge badge-success" ng-cloak>{{global_miners.length}}</span>
+                  <span class="badge badge-success" ng-cloak>{{global_nodes.length}}</span>
                 </a>
               </li>
               <!-- /.menu-item -->
@@ -363,17 +363,15 @@
   <script src="scripts/controllers/billing.js"></script>
   <script src="scripts/controllers/hosts.js"></script>
   <script src="scripts/controllers/host.js"></script>
-  <script src="scripts/controllers/miners.js"></script>
-  <script src="scripts/controllers/_miner.js"></script>
-  <script src="scripts/controllers/miners.new.js"></script>
-  <script src="scripts/controllers/miners.new_pos.js"></script>
+  <script src="scripts/controllers/nodes.js"></script>
+  <script src="scripts/controllers/node.js"></script>
+  <script src="scripts/controllers/nodes.new.js"></script>
   <script src="scripts/controllers/login.js"></script>
   <script src="scripts/controllers/account.js"></script>
   <script src="scripts/controllers/install.js"></script>
   <script src="scripts/controllers/wallets.js"></script>
   <script src="scripts/controllers/logs.js"></script>
   <script src="scripts/controllers/events.js"></script>
-  <script src="scripts/controllers/nodes.js"></script>
   <script src="scripts/filters/hashrate.js"></script>
   <script src="scripts/filters/password.js"></script>
   <script src="scripts/services/auth.js"></script>

@@ -2,18 +2,18 @@
 
 /**
  * @ngdoc function
- * @name menoetiusApp.controller:MinerCtrl
+ * @name menoetiusApp.controller:NodeCtrl
  * @description
- * # MinerCtrl
+ * # NodeCtrl
  * Controller of the menoetiusApp
  */
 angular.module('menoetiusApp')
-  .controller('MinerCtrl', function($scope, $state, minersService) {
+  .controller('NodeCtrl', function($scope, $state, minersService) {
     $scope.miner = null;
 
     function set_token() {
       minersService.get({
-        id: $state.params.miner,
+        id: $state.params.node,
         controller: 'logs'
       }).$promise.then(function(data) {
         if (data.ws) {

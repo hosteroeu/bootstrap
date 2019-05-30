@@ -2,13 +2,13 @@
 
 /**
  * @ngdoc function
- * @name menoetiusApp.controller:MinersNewCtrl
+ * @name menoetiusApp.controller:NodesNewCtrl
  * @description
- * # MinersNewCtrl
+ * # NodesNewCtrl
  * Controller of the menoetiusApp
  */
 angular.module('menoetiusApp')
-  .controller('MinersNewCtrl', function($state, minersService, hostsService, accountsService) {
+  .controller('NodesNewCtrl', function($state, minersService, hostsService, accountsService) {
     var account = JSON.parse(localStorage.getItem('account'));
     var _this = this;
     var getHostById = function(hosts, id) {
