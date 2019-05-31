@@ -54,8 +54,6 @@
             <tr>
               <th>Node</th>
               <th>Coin</th>
-              <th>Hashrate</th>
-              <!--<th>Est. 24h Rewards</th>-->
               <th>Updated</th>
               <th class="d-none d-sm-none d-md-none d-lg-block">Device</th>
               <th>&nbsp;</th>
@@ -73,26 +71,6 @@
               <td>
                 <a ui-sref="wallets.wallet({wallet: node.coin})">{{ node.coin | ucfirst }}</a>
               </td>
-              <td>
-                <span ng-if="!node.temporary">
-                  {{ node.power | hashrate }}
-                  <span class="badge badge-secondary" data-toggle="tooltip" data-placement="top" title="Updated every 30 minutes">
-                    <i class="fa fa-info"></i>
-                  </span>
-                </span>
-                <span ng-if="node.temporary">
-                  -
-                  <span class="badge badge-secondary" data-toggle="tooltip" data-placement="top" title="Not computed for temporary nodes">
-                    <i class="fa fa-info"></i>
-                  </span>
-                </span>
-              </td>
-              <!--
-              <td>
-                <span ng-if="!node.temporary">{{ node.reward_24h_eur }} &euro;</span>
-                <span ng-if="node.temporary">-</span>
-              </td>
-              -->
               <td>
                 {{ node.updated_at | timeAgo }}
               </td>

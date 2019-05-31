@@ -23,8 +23,10 @@ angular.module('menoetiusApp')
     });
 
     var getMiners = function() {
-      $scope.nodes = minersService.query({
+      minersService.query({
         mode: 'node'
+      }).$promise.then(function(res) {
+        $scope.nodes = res;
       });
     };
 
