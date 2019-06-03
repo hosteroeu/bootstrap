@@ -293,11 +293,11 @@
           <i class="fa fa-fw fa-bell"></i> You are on the demo account, the data is restored every hour. If you want to create an account, you need to <a href="" ng-click="authService.logout()" class="alert-link">Logout</a>.
         </div>
 
-        <div class="page-message" ng-if="global_miners.length > (global_account.plan_miners + global_account.bonus_miners)" ng-cloak>
+        <div class="page-message" ng-if="global_nodes.length > (global_account.plan_nodes + global_account.bonus_nodes)" ng-cloak>
           <i class="fa fa-fw fa-bell"></i> <a ui-sref="billing" class="alert-link">Upgrade</a> your account or remove some miners to avoid termination!
         </div>
 
-        <div class="page-message" ng-if="global_miners.length == (global_account.plan_miners + global_account.bonus_miners)" ng-cloak>
+        <div class="page-message" ng-if="global_nodes.length == (global_account.plan_nodes + global_account.bonus_nodes)" ng-cloak>
           <i class="fa fa-fw fa-bell"></i> <a ui-sref="billing" class="alert-link">Upgrade</a> your account if you want to create more miners.
         </div>
       </span>

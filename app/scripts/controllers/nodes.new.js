@@ -99,11 +99,6 @@ angular.module('menoetiusApp')
           break;
       }
 
-      if (_this.selected_host.deployed !== '0') {
-        window.toastr.error('Device is already deployed');
-        return;
-      }
-
       minersService.save({}, new_miner).$promise.then(function() {
         hostsService.update({
           id: _this.selected_host.id

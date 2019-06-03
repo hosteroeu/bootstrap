@@ -80,7 +80,7 @@
                 </a>
                 <span ng-if="!node.Host">-</span>
               </td>
-              <td class="align-middle text-right" ng-if="!node.temporary">
+              <td class="align-middle text-right">
                 <!--
                 <a href="http://dashboard.hostero.eu/#!/logs/{{node.id}}" target="_blank" class="btn btn-sm btn-info" data-toggle="tooltip" data-placement="top" title="Logs">
                   <i class="fa fa-database"></i>
@@ -103,9 +103,6 @@
                   <i class="far fa-trash-alt"></i>
                   <span class="sr-only">Remove</span>
                 </a>
-              </td>
-              <td class="align-middle text-right" ng-if="node.temporary">
-                -
               </td>
             </tr>
           </tbody>
