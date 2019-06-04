@@ -108,7 +108,7 @@ angular.module('menoetiusApp')
 
         window.toastr.success('Miner was deployed');
 
-        $state.go('miners');
+        $state.go('nodes');
       });
     };
   });

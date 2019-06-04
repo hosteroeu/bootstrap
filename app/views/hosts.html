@@ -81,7 +81,7 @@
                 {{ host.updated_at | timeAgo }}
               </td>
               <td class="align-middle text-right">
-                <a ui-sref="new_miner({host:host.id})" ng-if="host.status == 'started' && global_nodes.length < (global_account.plan_nodes + global_account.bonus_nodes)" class="btn btn-sm btn-info" data-toggle="tooltip" data-placement="top" title="Deploy">
+                <a ui-sref="new_node({host:host.id})" ng-if="host.status == 'started' && global_nodes.length < (global_account.plan_nodes + global_account.bonus_nodes)" class="btn btn-sm btn-info" data-toggle="tooltip" data-placement="top" title="Deploy">
                   <i class="fas fa-plus"></i>
                   <span class="sr-only">Deploy</span>
                 </a>
