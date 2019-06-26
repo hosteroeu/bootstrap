@@ -28,12 +28,15 @@ angular.module('menoetiusApp')
           $scope.global_hosts = [];
 
           res.forEach(function(host) {
+            if (host.user_id === 'shared') {
+              return;
+            }
+
             $scope.global_hosts.push(host);
           });
         });
 
         $scope.global_coins = coinsService.query({
-          on_hostero: 1,
           on_bootstrap: 1
         });
 
