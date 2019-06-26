@@ -123,11 +123,6 @@ angular
         parent: 'node',
         templateUrl: 'views/node.charts.html'
       })
-      .state('node.logs', {
-        url: '/logs',
-        parent: 'node',
-        templateUrl: 'views/node.logs.html'
-      })
       .state('node.events', {
         url: '/events',
         parent: 'node',
@@ -138,15 +133,6 @@ angular
         templateUrl: 'views/logs.html',
         controller: 'LogsCtrl',
         controllerAs: 'logsCtrl',
-        data: {
-          requiresLogin: false
-        }
-      })
-      .state('install', {
-        url: '/install',
-        templateUrl: 'views/install_new.html',
-        controller: 'InstallCtrl',
-        controllerAs: 'installCtrl',
         data: {
           requiresLogin: false
         }
