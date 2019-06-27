@@ -4,14 +4,14 @@
   <div class="page-inner">
     <!-- .page-title-bar -->
     <header class="page-title-bar">
-      <h1 class="page-title">Deploy Node</h1>
+      <h1 class="page-title">Deploy node</h1>
     </header>
     <!-- /.page-title-bar -->
 
     <div class="page-section">
       <div class="card card-fluid">
         <div class="card-body">
-          <h4 class="card-title">Select device</h4>
+          <h4 class="card-title">Device</h4>
           <hr />
           <div class="row">
             <div class="col-sm-12">
@@ -30,7 +30,27 @@
     <div class="page-section">
       <div class="card card-fluid">
         <div class="card-body">
-          <h4 class="card-title">Select coin</h4>
+          <h4 class="card-title">Name</h4>
+          <hr />
+          <!-- .form -->
+          <form>
+            <!-- .fieldset -->
+            <fieldset>
+              <!-- .form-group -->
+              <div class="form-group">
+                <input type="text" class="form-control" ng-model="ctrl.name" placeholder="node#1234">
+              </div>
+              <!-- /.form-group -->
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-section">
+      <div class="card card-fluid">
+        <div class="card-body">
+          <h4 class="card-title">Coin</h4>
           <hr />
           <!-- .section-block -->
           <div class="section-block text-center text-sm-left">
@@ -62,9 +82,9 @@
     <div class="page-section">
       <div class="card card-fluid">
         <div class="card-body">
-          <h4 class="card-title">Set wallet</h4>
+          <h4 class="card-title">Mining pool and wallet</h4>
           <hr />
-          <p><a href="" ng-click="ctrl.show_wallet = !ctrl.show_wallet">Overwrite wallet's default settings</a></p>
+          <p><a href="" ng-click="ctrl.show_wallet = !ctrl.show_wallet">Change default settings</a></p>
 
           <div ng-include src="'views/wallets/' + ctrl.wallets.auto_deploy_coin + '.html'" ng-show="ctrl.show_wallet"></div>
         </div>

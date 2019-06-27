@@ -60,6 +60,16 @@ angular.module('menoetiusApp')
       return icon;
     };
 
+    this.get_name = function(miner) {
+      var name = 'node#' + miner.id;
+
+      if (miner.name.indexOf('node-') === -1) {
+        name = miner.name;
+      }
+
+      return name;
+    };
+
     this.redeploy = function(node) {
       /*
       var confirm = $mdDialog.confirm()

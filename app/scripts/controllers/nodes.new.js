@@ -28,6 +28,7 @@ angular.module('menoetiusApp')
     _this.selected_host = null;
     _this.selected_host_id = null;
     _this.threads = 1;
+    _this.name = null;
 
     hostsService.query().$promise.then(function(hosts) {
       _this.hosts = hosts;
@@ -35,6 +36,7 @@ angular.module('menoetiusApp')
       if ($state.params.host) {
         _this.selected_host = getHostById(_this.hosts, $state.params.host);
         _this.selected_host_id = $state.params.host;
+        _this.update_threads();
       }
     });
 
@@ -42,6 +44,7 @@ angular.module('menoetiusApp')
       _this.selected_host = getHostById(_this.hosts, _this.selected_host_id);
 
       _this.threads = _this.selected_host ? parseInt(_this.selected_host.cpu_count) : 0;
+      _this.name = 'node-' + _this.selected_host_id;
     };
 
     accountsService.get({
@@ -72,13 +75,11 @@ angular.module('menoetiusApp')
         window.toastr.warning('Please select a Device');
         return;
       }
-
-      var name = 'node-' + _this.selected_host.id;
       var new_miner = {
-        mode: 'node',
-        name: name,
+        name: _this.name,
         coin: _this.wallets.auto_deploy_coin,
         status: 'stopped',
+        mode: 'node',
         deployed: '2',
         threads: _this.threads,
         processor: null,
