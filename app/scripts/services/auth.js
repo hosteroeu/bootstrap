@@ -51,7 +51,7 @@ angular.module('menoetiusApp')
 
           $rootScope.$broadcast('userProfileSet', profile);
 
-          //lock.hide();
+          lock.hide();
 
           accountsService.get({
             controller: 'sync'

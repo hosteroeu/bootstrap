@@ -288,7 +288,7 @@
 
     <!-- .app-main -->
     <main class="app-main">
-      <span ng-if="global_state.current.name != 'install' && global_state.current.name != 'logs'">
+      <span ng-if="global_state.current.name != 'install' && global_state.current.name != 'logs' && global_state.current.name != 'login'">
         <div class="page-message" ng-if="global_account.email === 'demo@hostero.eu'" ng-cloak>
           <i class="fa fa-fw fa-bell"></i> You are on the demo account, the data is restored every hour. If you want to create an account, you need to <a href="" ng-click="authService.logout()" class="alert-link">Logout</a>.
         </div>
