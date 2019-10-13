@@ -51,7 +51,6 @@
             <p>Device: <strong><a ui-sref="host({host: miner.Host.id})">{{ miner.Host.name }}</a></strong></p>
             <p ng-if="miner.coin != 'webdollar'">Wallet / Username: <strong>{{ miner.wallet }}</strong></p>
             <p ng-if="miner.mining_pool_url">Mining Pool: <strong>{{ miner.mining_pool_url }}</strong></p>
-            <p ng-if="miner.password">Password: <strong>{{ miner.password | password }}</strong></p>
             <p ng-if="miner.coin == 'webdollar'">Wallet: <strong><a ng-href="{{ getHref(miner.wallet) }}" target="_blank">{{ miner.wallet }}</a></strong></p>
             <p>Threads: <strong>{{ miner.threads }}</strong></p>
 
