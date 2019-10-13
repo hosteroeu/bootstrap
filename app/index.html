@@ -43,6 +43,14 @@
 </head>
 
 <body ng-app="menoetiusApp" ng-controller="RootCtrl as rootCtrl">
+  <div class="loader_full_page" ng-hide="loaded">
+    <br />
+    <br />
+    <br />
+    <p><strong>The spice must flow</strong></p>
+    <p><img src="images/loading.gif" /></p>
+  </div>
+
   <!-- .app -->
   <div class="app" ng-class="{'has-fullwidth': minimalLayout}">
     <!-- .app-header -->

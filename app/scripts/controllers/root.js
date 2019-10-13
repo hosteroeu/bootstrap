@@ -13,7 +13,14 @@ angular.module('menoetiusApp')
 
     $scope.isAuthenticated = false;
     $rootScope.minimalLayout = false;
+    $rootScope.loaded = false;
     $scope.global_state = $state;
+
+    angular.element(document).ready(function() {
+      setTimeout(function() {
+        $rootScope.loaded = true;
+      }, 200);
+    });
 
     // TODO: Don't make API calls from the root controller, it's not cool, use
     // another controller
