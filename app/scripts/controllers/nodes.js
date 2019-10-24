@@ -71,16 +71,6 @@ angular.module('menoetiusApp')
     };
 
     this.redeploy = function(node) {
-      /*
-      var confirm = $mdDialog.confirm()
-        .title('Do you want to re-deploy the miner?')
-        .textContent('Re-deploying the miner takes several minutes and will delete the host and the miner.')
-        .ariaLabel('Re-deploy')
-        .targetEvent($event)
-        .ok('Re-deploy')
-        .cancel('Cancel');
-      */
-
       minersService.remove({
         id: node.id
       });
@@ -100,38 +90,51 @@ angular.module('menoetiusApp')
       }, 2000);
     };
 
-    this.remove = function(node) {
-      /*
-      var confirm = $mdDialog.confirm()
-        .title('Do you want to remove the miner?')
-        .textContent('The hosts will not be deleted. If you want to stop using the host, you need to delete it as well.')
-        .ariaLabel('Remove')
-        .targetEvent($event)
-        .ok('Remove')
-        .cancel('Cancel');
-      */
+    this.logs = function(node) {
+      window.toastr.info('Getting logs for node ' + node.name);
 
-      minersService.remove({
-        id: node.id
-      }).$promise.then(function() {
-        if ($state.current.name === 'nodes') {
-          $state.reload();
-        } else {
-          $state.go('nodes');
+      minersService.get({
+        id: node.id,
+        controller: 'logs'
+      }).$promise.then(function(data) {
+        if (data.ws) {
+          var token = data.ws.split('token=');
+
+          if (token && token.length > 1 && token[1]) {
+            window.open('http://bootstrap.hostero.eu/#!/logs/' + token[1]);
+          } else {
+            window.toastr.error('Logs can not be retrieved at this time');
+          }
         }
-
-        if (node.Host && node.Host.user_id === 'shared') {
-          return;
-        }
-
-        hostsService.update({
-            id: node.host_id
-          }, {
-            deployed: '0'
-          }).$promise
-          .then(console.log)
-          .catch(console.error);
       });
+    };
+
+    this.remove = function(node) {
+      if (window.confirm('Do you want to delete ' + node.name + '?')) {
+        minersService.remove({
+          id: node.id
+        }).$promise.then(function() {
+          window.toastr.success('Node has been deleted');
+
+          if ($state.current.name === 'nodes') {
+            $state.reload();
+          } else {
+            $state.go('nodes');
+          }
+
+          if (node.Host && node.Host.user_id === 'shared') {
+            return;
+          }
+
+          hostsService.update({
+              id: node.host_id
+            }, {
+              deployed: '0'
+            }).$promise
+            .then(console.log)
+            .catch(console.error);
+        });
+      }
     };
 
     $scope.$on('$destroy', function() {

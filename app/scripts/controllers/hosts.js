@@ -54,46 +54,42 @@ angular.module('menoetiusApp')
     };
 
     this.redeploy_all = function() {
-      $scope.hosts.forEach(function(host) {
-        hostsService.remove({
-          id: host.id
+      if (window.confirm('Do you want to redeploy all devices?')) {
+        $scope.hosts.forEach(function(host) {
+          hostsService.remove({
+            id: host.id
+          });
         });
-      });
 
-      $scope.miners.forEach(function(miner) {
-        minersService.remove({
-          id: miner.id
+        $scope.miners.forEach(function(miner) {
+          minersService.remove({
+            id: miner.id
+          });
         });
-      });
 
-      setTimeout(function() {
-        window.toastr.info('Deleting all the devices and miners...');
-        $state.reload();
-      }, 2000);
+        setTimeout(function() {
+          window.toastr.info('Deleting all the devices and miners...');
+          $state.reload();
+        }, 2000);
+      }
     };
 
-    this.remove = function(host) {
-      /*
-      var confirm = $mdDialog.confirm()
-        .title('Do you want to remove the host?')
-        .textContent('The host will not be powered-off. You need to manually power-off the machine.')
-        .ariaLabel('Remove')
-        .targetEvent($event)
-        .ok('Remove')
-        .cancel('Cancel');
-*/
+    this.redeploy = function(host) {
+      if (window.confirm('Do you want to redeploy ' + host.name + '?')) {
+        hostsService.remove({
+            id: host.id
+          }).$promise
+          .then(function() {
+            window.toastr.success('Device redeployed. It will appear shortly in your account');
 
-      hostsService.remove({
-          id: host.id
-        }).$promise
-        .then(function() {
-          if ($state.current.name === 'hosts') {
-            $state.reload();
-          } else {
-            $state.go('hosts');
-          }
-        })
-        .catch(console.error);
+            if ($state.current.name === 'hosts') {
+              $state.reload();
+            } else {
+              $state.go('hosts');
+            }
+          })
+          .catch(console.error);
+      }
     };
 
     $scope.$on('$destroy', function() {

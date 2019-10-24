@@ -18,7 +18,10 @@ angular.module('menoetiusApp')
       }).$promise.then(function(data) {
         if (data.ws) {
           var token = data.ws.split('token=');
-          $scope.logs_token = token[1];
+
+          if (token && token.length > 1 && token[1]) {
+            $scope.logs_token = token[1];
+          }
         }
       });
     }
