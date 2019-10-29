@@ -19,7 +19,7 @@ angular.module('menoetiusApp')
         if (data.ws) {
           var token = data.ws.split('token=');
 
-          if (token && token.length > 1 && token[1]) {
+          if (token && token.length > 1 && token[1] && token[1] !== 'undefined') {
             $scope.logs_token = token[1];
           }
         }
