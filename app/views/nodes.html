@@ -56,6 +56,7 @@
             <tr>
               <th>Node</th>
               <th>Coin</th>
+              <th>Block</th>
               <th>Updated</th>
               <th class="d-none d-sm-none d-md-none d-lg-block">Device</th>
               <th>&nbsp;</th>
@@ -72,6 +73,9 @@
               </td>
               <td>
                 <a ui-sref="wallets.wallet({wallet: node.coin})">{{ node.coin | ucfirst }}</a>
+              </td>
+              <td>
+                {{ node.block | number }}
               </td>
               <td>
                 {{ node.updated_at | timeAgo }}

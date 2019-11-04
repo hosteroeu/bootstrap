@@ -52,6 +52,9 @@
             <p ng-if="miner.coin != 'webdollar'">Wallet / Username: <strong>{{ miner.wallet }}</strong></p>
             <p ng-if="miner.mining_pool_url">Mining Pool: <strong>{{ miner.mining_pool_url }}</strong></p>
             <p ng-if="miner.coin == 'webdollar'">Wallet: <strong><a ng-href="{{ getHref(miner.wallet) }}" target="_blank">{{ miner.wallet }}</a></strong></p>
+            <p ng-if="miner.coin == 'webdollar'">Block: <strong><a href="http://nodes.wd.hostero.eu" target="_blank">{{ miner.block | number }}</a></strong></p>
+            <p ng-if="miner.coin != 'webdollar'">Block: <strong><{{ miner.block | number }}</strong></p>
+            <p>Power: <strong>{{ miner.power | number }} H/s</strong></p>
             <p>Threads: <strong>{{ miner.threads }}</strong></p>
 
             <hr />
