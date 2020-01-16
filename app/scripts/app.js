@@ -242,7 +242,7 @@ angular
       }
 
       if (window.gtag) {
-        window.gtag('config', 'UA-128907941-2', {
+        window.gtag('config', 'UA-128907941-5', {
           'page_path': location
         });
       }
